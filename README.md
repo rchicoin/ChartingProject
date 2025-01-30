@@ -3,8 +3,8 @@
 ## A subtitle
 
 A *bulleted* list:
-- item 1
-- item 2
-- item 3
+- :)
+- :)
+- is this working
 
 An example of text with **bold** and *italic* fonts.  
