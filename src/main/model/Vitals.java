@@ -23,14 +23,44 @@ public class Vitals {
 
     }
 
-    // REQUIRES: resp rate >= 0, spo2 >=0 and =<100, temperature must be greater
-    // than or equal to 0, systolicBp >=0, diastolicBp>=0. Also all vital signs must
-    // be recorded.
+    // REQUIRES: respRate must be >=0.
     // MODIFIES: this
-    // EFFECTS: calculates the NEWS score.
-    public int calculateNews() {
+    // EFFECTS: returns the respRate contribution to the overall NEWS score
+    public int calculateRespRate() {
+        return 0;
+    }
 
-        return 0; // stub
+    // REQUIRES: spo2 must be >=0 and <=100.
+    // MODIFIES: this
+    // EFFECTS: returns the spo2 contribution to the overall NEWS score
+    public int calculateSpo2() {
+        return 0;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: returns the supplemental o2 contribution to the overall NEWS score
+    public int calculateSupplementalOxygen() {
+        return 0;
+    }
+
+    // REQUIRES: temperature must be >=0
+    // MODIFIES: this
+    // EFFECTS: returns the temperature contribution to the overall NEWS score
+    public int calculateTemperature() {
+        return 0;
+    }
+
+    // REQUIRES: systolicBp must be >=0.
+    // MODIFIES: this
+    // EFFECTS: returns the systolicBp contribution to the overall NEWS score
+    public int calculateSystolicBp() {
+        return 0;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: returns the avpuScore contribution to the overall NEWS score
+    public int calculateAvpuScore() {
+        return 0;
     }
 
     // SETTERS
@@ -59,7 +89,7 @@ public class Vitals {
 
     }
 
-    public void setAVPU(boolean avpuScore) {
+    public void setAvpu(boolean avpuScore) {
 
     }
 
@@ -90,8 +120,12 @@ public class Vitals {
         return 0;
     }
 
-    public boolean setAVPU() {
+    public boolean getAvpu() {
         return false;
+    }
+
+    public int getNewsScore() {
+        return 0;
     }
 
 }
