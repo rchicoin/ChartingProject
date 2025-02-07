@@ -11,7 +11,7 @@ public class TestVitals {
 
     @BeforeEach
     void runBefore() {
-        testVitals= new Vitals(12, 97, false, 36.5, 120, 80, true);
+        testVitals= new Vitals(12, 97, false, 36.5, 120, 80, true, 60);
     }
 
     @Test
@@ -24,6 +24,7 @@ public class TestVitals {
         assertEquals(80, testVitals.getDiastolicBp());
         assertEquals(true, testVitals.getAvpu());
         assertEquals(0, testVitals.getNewsScore());
+        assertEquals(60, testVitals.getHeartRate());
     }
 
     @Test
@@ -197,5 +198,51 @@ public class TestVitals {
         assertEquals(3, testVitals.calculateAvpuScore());
     }
 
+    @Test 
+    void testCalculateHeartRateAllRanges(){
+        assertEquals(0, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(0);
+        assertEquals(3, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(39);
+        assertEquals(3, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(40);
+        assertEquals(3, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(41);
+        assertEquals(1, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(50);
+        assertEquals(1, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(51);
+        assertEquals(0, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(90);
+        assertEquals(0, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(91);
+        assertEquals(1, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(110);
+        assertEquals(1, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(111);
+        assertEquals(2, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(130);
+        assertEquals(2, testVitals.calculateHeartRate());
+
+        testVitals.setHearRate(131);
+        assertEquals(3, testVitals.calculateHeartRate());
+    }
+
+    @Test 
+    void testSetDiastolicBp(){
+        testVitals.setDiastolicBp(85);
+        assertEquals(85, testVitals.getDiastolicBp());
+    }
 }
 

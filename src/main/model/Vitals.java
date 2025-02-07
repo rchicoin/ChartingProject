@@ -11,6 +11,7 @@ public class Vitals {
     private int diastolicBp; // diastolic blood pressure
     private boolean avpuScore; // AVPU score is patient awake, do they respond to verbal or painful stimuli, or
                                // none at all
+    private int heartRate;
     private int newsScore; // final calculated NEWS score based on vitals
 
     // REQUIRES: resp rate >= 0, spo2 >=0 and =<100, temperature must be greater
@@ -19,113 +20,197 @@ public class Vitals {
     // calculates the NEWS score.
 
     public Vitals(int respRate, int spo2, boolean supplementalOxygen, double temperature, int systolicBp,
-            int diastolicBp, boolean avpuScore) {
+            int diastolicBp, boolean avpuScore, int heartRate) {
+        this.respRate = respRate;
+        this.spo2 = spo2;
+        this.supplementalOxygen = supplementalOxygen;
+        this.temperature = temperature;
+        this.systolicBp = systolicBp;
+        this.diastolicBp = diastolicBp;
+        this.avpuScore = avpuScore;
+        this.heartRate = heartRate;
+        this.newsScore = calculateRespRate() + calculateSpo2() + calculateSupplementalOxygen() + calculateTemperature()
+                + calculateSystolicBp() + calculateAvpuScore() + calculateHeartRate();
 
     }
 
     // REQUIRES: respRate must be >=0.
-    // MODIFIES: this
     // EFFECTS: returns the respRate contribution to the overall NEWS score
     public int calculateRespRate() {
-        return 0;
+        if (respRate <= 8) {
+            return 3;
+        } else if (respRate <= 11) {
+            return 1;
+        } else if (respRate <= 20) {
+            return 0;
+        } else if (respRate <= 24) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 
     // REQUIRES: spo2 must be >=0 and <=100.
-    // MODIFIES: this
     // EFFECTS: returns the spo2 contribution to the overall NEWS score
     public int calculateSpo2() {
-        return 0;
+        if (spo2 <= 91) {
+            return 3;
+        } else if (spo2 <= 93) {
+            return 2;
+        } else if (spo2 <= 95) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
-    // MODIFIES: this
     // EFFECTS: returns the supplemental o2 contribution to the overall NEWS score
     public int calculateSupplementalOxygen() {
-        return 0;
+        if (supplementalOxygen) {
+            return 2;
+        } else {
+            return 0;
+        }
     }
 
     // REQUIRES: temperature must be >=0
-    // MODIFIES: this
     // EFFECTS: returns the temperature contribution to the overall NEWS score
     public int calculateTemperature() {
-        return 0;
+
+        if (temperature <= 35) {
+            return 3;
+        } else if (temperature <= 36) {
+            return 1;
+        } else if (temperature <= 38) {
+            return 0;
+        } else if (temperature <= 39) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
     // REQUIRES: systolicBp must be >=0.
-    // MODIFIES: this
     // EFFECTS: returns the systolicBp contribution to the overall NEWS score
     public int calculateSystolicBp() {
-        return 0;
+        if (systolicBp <= 90) {
+            return 3;
+        } else if (systolicBp <= 100) {
+            return 2;
+        } else if (systolicBp <= 110) {
+            return 1;
+        } else if (systolicBp <= 219) {
+            return 0;
+        } else {
+            return 3;
+        }
     }
 
-    // MODIFIES: this
+    // REQUIRES: heartRate must be >=0.
+    // EFFECTS: returns the systolicBp contribution to the overall NEWS score
+    public int calculateHeartRate() {
+        if (heartRate <= 40) {
+            return 3;
+        } else if (heartRate <= 50) {
+            return 1;
+        } else if (heartRate <= 90) {
+            return 0;
+        } else if (heartRate <= 110) {
+            return 1;
+        } else if (heartRate <= 130) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
     // EFFECTS: returns the avpuScore contribution to the overall NEWS score
     public int calculateAvpuScore() {
-        return 0;
+        if (avpuScore) {
+            return 0;
+        } else {
+            return 3;
+        }
     }
 
     // SETTERS
 
     public void setRespRate(int respRate) {
+        this.respRate = respRate;
 
     }
 
     public void setSpo2(int spo2) {
+        this.spo2 = spo2;
 
     }
 
     public void setSupplementalOxygen(boolean supplementalOxygen) {
+        this.supplementalOxygen = supplementalOxygen;
 
     }
 
     public void setTemperature(double temperature) {
+        this.temperature = temperature;
 
     }
 
-    public void setSystolicBp(int systolic) {
+    public void setSystolicBp(int systolicBp) {
 
+        this.systolicBp = systolicBp;
     }
 
-    public void setDiastolicBp(int diastolic) {
+    public void setDiastolicBp(int diastolicBp) {
 
+        this.diastolicBp = diastolicBp;
     }
 
     public void setAvpu(boolean avpuScore) {
+        this.avpuScore = avpuScore;
 
+    }
+
+    public void setHearRate(int heartRate) {
+        this.heartRate = heartRate;
     }
 
     // GETTERS
 
     public int getRespRate() {
 
-        return 0;
+        return respRate;
     }
 
     public int getSpo2() {
-        return 0;
+        return spo2;
     }
 
     public boolean getSupplementalOxygen() {
-        return false;
+        return supplementalOxygen;
     }
 
     public double getTemperature() {
-        return 0;
+        return temperature;
     }
 
     public int getSystolicBp() {
-        return 0;
+        return systolicBp;
     }
 
     public int getDiastolicBp() {
-        return 0;
+        return diastolicBp;
     }
 
     public boolean getAvpu() {
-        return false;
+        return avpuScore;
     }
 
     public int getNewsScore() {
-        return 0;
+        return newsScore;
+    }
+
+    public int getHeartRate() {
+        return heartRate;
     }
 
 }

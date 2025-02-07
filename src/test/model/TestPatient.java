@@ -12,7 +12,7 @@ public class TestPatient {
     @BeforeEach
     void runBefore(){
         testPatient = new Patient("testName", "testLastName");
-        testVitals=  new Vitals (12, 97, false, 36.5, 120, 80, true);
+        testVitals=  new Vitals (12, 97, false, 36.5, 120, 80, true, 60);
     }
     
     @Test 
