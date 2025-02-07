@@ -29,4 +29,16 @@ public class TestPatient {
         assertEquals(1, testPatient.getVitalList().size());
     }
 
+
+    @Test 
+    void testSetFirstName(){
+        testPatient.setFirstName("bob");
+        assertEquals("bob", testPatient.getFirstName());
+    }
+
+    @Test 
+    void testSetLastName(){
+        testPatient.setLastName("marley");
+        assertEquals("marley", testPatient.getLastName());
+    }
 }
