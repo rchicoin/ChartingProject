@@ -7,15 +7,17 @@ public class Patient {
 
     private String firstName;
     private String lastName;
+    private int id;
     List<Vitals> vitals;
 
     // REQUIRES: the patients first and last name must not be empty (no empty
-    // strings)
+    // strings) and the same patient id cannot be entered twice.
     // EFFECTS: creates a patient with a first and last name and a list of vitals
-    public Patient(String firstName, String lastName) {
-        this.firstName= firstName;
-        this.lastName= lastName;
-        vitals= new ArrayList<>();
+    public Patient(String firstName, String lastName, int id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+        vitals = new ArrayList<>();
     }
 
     // MODIFIES: this
@@ -27,11 +29,15 @@ public class Patient {
     // SETTERS
 
     public void setFirstName(String firstName) {
-        this.firstName=firstName;
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName=lastName;
+        this.lastName = lastName;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     // GETTERS
@@ -46,6 +52,10 @@ public class Patient {
 
     public List<Vitals> getVitalList() {
         return vitals;
+    }
+
+    public int getId() {
+        return id;
     }
 
 }

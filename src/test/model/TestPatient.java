@@ -11,7 +11,7 @@ public class TestPatient {
 
     @BeforeEach
     void runBefore(){
-        testPatient = new Patient("testName", "testLastName");
+        testPatient = new Patient("testName", "testLastName", 4);
         testVitals=  new Vitals (12, 97, false, 36.5, 120, 80, true, 60);
     }
     
@@ -27,6 +27,8 @@ public class TestPatient {
         assertEquals(0, testPatient.getVitalList().size());
         testPatient.addVitals(testVitals);
         assertEquals(1, testPatient.getVitalList().size());
+        testPatient.addVitals(testVitals);
+        assertEquals(2, testPatient.getVitalList().size());
     }
 
 
@@ -40,5 +42,11 @@ public class TestPatient {
     void testSetLastName(){
         testPatient.setLastName("marley");
         assertEquals("marley", testPatient.getLastName());
+    }
+
+    @Test
+    void testSetId(){
+        testPatient.setId(7);
+        assertEquals(7, testPatient.getId());
     }
 }

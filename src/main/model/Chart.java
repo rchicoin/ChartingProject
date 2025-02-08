@@ -18,8 +18,8 @@ public class Chart {
 
     }
 
-    // EFFECTS: returns a patient with a matching first and last name
-    public Patient getPatient(String firstName, String lastName) {
+    // EFFECTS: returns a patient with a id, returns null if there is not patient with that id. 
+    public Patient getPatient(int id) {
         return null;
     }
 
