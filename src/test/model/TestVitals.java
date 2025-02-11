@@ -5,13 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestVitals {
-    
 
     Vitals testVitals;
 
     @BeforeEach
     void runBefore() {
-        testVitals= new Vitals(12, 97, false, 36.5, 120, 80, true, 60);
+        testVitals = new Vitals(12, 97, false, 36.5, 120, 80, true, 60);
     }
 
     @Test
@@ -28,7 +27,7 @@ public class TestVitals {
     }
 
     @Test
-    void testCalculateRespRateAllRanges(){
+    void testCalculateRespRateAllRanges() {
         assertEquals(0, testVitals.calculateRespRate());
 
         testVitals.setRespRate(0);
@@ -66,8 +65,8 @@ public class TestVitals {
 
     }
 
-    @Test 
-    void testCalculateSpo2AllRanges(){
+    @Test
+    void testCalculateSpo2AllRanges() {
         assertEquals(0, testVitals.calculateSpo2());
 
         testVitals.setSpo2(0);
@@ -99,8 +98,8 @@ public class TestVitals {
 
     }
 
-    @Test 
-    void testCalculateSupplementalOxygenAllRanges(){
+    @Test
+    void testCalculateSupplementalOxygenAllRanges() {
         assertEquals(0, testVitals.calculateSupplementalOxygen());
 
         testVitals.setSupplementalOxygen(true);
@@ -108,9 +107,9 @@ public class TestVitals {
 
     }
 
-    @Test 
+    @Test
 
-    void testCalculateTemperatureAllRanges(){
+    void testCalculateTemperatureAllRanges() {
         assertEquals(0, testVitals.calculateTemperature());
 
         testVitals.setTemperature(0);
@@ -148,13 +147,13 @@ public class TestVitals {
 
     }
 
-    @Test 
-    void testCalculateSystolicBpAllRanges(){
+    @Test
+    void testCalculateSystolicBpAllRanges() {
         assertEquals(0, testVitals.calculateSystolicBp());
 
         testVitals.setSystolicBp(0);
         assertEquals(3, testVitals.calculateSystolicBp());
-
+        
         testVitals.setSystolicBp(89);
         assertEquals(3, testVitals.calculateSystolicBp());
 
@@ -187,19 +186,19 @@ public class TestVitals {
 
         testVitals.setSystolicBp(250);
         assertEquals(3, testVitals.calculateSystolicBp());
-        
+
     }
 
-    @Test 
-    void testCalculateAvpuScoreAllRanges(){
+    @Test
+    void testCalculateAvpuScoreAllRanges() {
         assertEquals(0, testVitals.calculateTemperature());
 
         testVitals.setAvpu(false);
         assertEquals(3, testVitals.calculateAvpuScore());
     }
 
-    @Test 
-    void testCalculateHeartRateAllRanges(){
+    @Test
+    void testCalculateHeartRateAllRanges() {
         assertEquals(0, testVitals.calculateHeartRate());
 
         testVitals.setHearRate(0);
@@ -239,10 +238,9 @@ public class TestVitals {
         assertEquals(3, testVitals.calculateHeartRate());
     }
 
-    @Test 
-    void testSetDiastolicBp(){
+    @Test
+    void testSetDiastolicBp() {
         testVitals.setDiastolicBp(85);
         assertEquals(85, testVitals.getDiastolicBp());
     }
 }
-
