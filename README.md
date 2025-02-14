@@ -19,3 +19,5 @@ I currently work as a nurse part-time; we chart this information in a platform c
 -	As a user, I want to be able to have a NEWS score calculated for me 
 -	As a user, I want to be alerted properly if my NEWS score requires intervention 
 -	As a user, I want to be able to create individual charts for individual patients 
+-	As a user, I want to be able to save my chart/patients and their corresponding vitals to a file (If I chose to do so)
+-	As a user, I want to be able to load my chart/patients and their corresponding vitals to a file (If I chose to do so)
