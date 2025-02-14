@@ -11,14 +11,14 @@ public class Vitals {
     private int diastolicBp; // diastolic blood pressure
     private boolean avpuScore; // AVPU score is patient awake, do they respond to verbal or painful stimuli, or
                                // none at all
-    private int heartRate;
+    private int heartRate; // heart rate
     private int newsScore; // final calculated NEWS score based on vitals
 
+    
     // REQUIRES: resp rate >= 0, spo2 >=0 and =<100, temperature must be greater
     // than or equal to 0, systolicBp >=0, diastolicBp>=0.
     // EFFECTS: assigns parameter values to respective vital signs as seen above.
     // calculates the NEWS score.
-
     public Vitals(int respRate, int spo2, boolean supplementalOxygen, double temperature, int systolicBp,
             int diastolicBp, boolean avpuScore, int heartRate) {
         this.respRate = respRate;
