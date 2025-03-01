@@ -36,6 +36,16 @@ public class Vitals implements Writable {
 
     }
 
+    // EFFECTS: calculates the newsScore
+    public int calculateNewsScore(int respRate, int spo2, boolean supplementalOxygen, double temperature,
+            int systolicBp,
+            int diastolicBp, boolean avpuScore, int heartRate) {
+        int score = calculateRespRate() + calculateSpo2() + calculateSupplementalOxygen() + calculateTemperature()
+                + calculateSystolicBp() + calculateAvpuScore() + calculateHeartRate();
+        return score;
+
+    }
+
     // REQUIRES: respRate must be >=0.
     // EFFECTS: returns the respRate contribution to the overall NEWS score
     public int calculateRespRate() {

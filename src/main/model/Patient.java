@@ -71,7 +71,7 @@ public class Patient implements Writable {
     }
 
     // EFFECTS: returns vitals in this patient as a JSON array
-    private JSONArray vitalsToJson() {
+    public JSONArray vitalsToJson() {
         return null;
 
     }

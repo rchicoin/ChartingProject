@@ -4,6 +4,7 @@ import java.io.IOException;
 import org.json.JSONObject;
 import model.Chart;
 
+// Inspiration for this code was used from: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 // Represents a reader that reads workroom from JSON data stored in file 
 public class JsonReader {
 

@@ -48,7 +48,7 @@ public class Chart implements Writable {
     }
 
     // EFFECTS: returns patients in this chart as a JSON array
-    private JSONArray vitalsToJson() {
+    public JSONArray vitalsToJson() {
         return null;
 
     }
