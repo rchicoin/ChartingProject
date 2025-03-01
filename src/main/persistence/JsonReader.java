@@ -13,7 +13,7 @@ import model.Patient;
 import model.Vitals;
 
 // Inspiration for this code was used from: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-// Represents a reader that reads workroom from JSON data stored in file 
+// Represents a reader that reads chart from JSON data stored in file 
 public class JsonReader {
 
     private String source;

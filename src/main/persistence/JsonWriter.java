@@ -6,13 +6,13 @@ import java.io.*;
 import model.*;
 
 // Inspiration for this code was used from: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-// Represents a writer that writes JSON representation of workroom to file 
+// Represents a writer that writes JSON representation of the chart to a file 
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
 
-    // EFFECTS: constructs writer to write to desitnation file
+    // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
         this.destination = destination;
 

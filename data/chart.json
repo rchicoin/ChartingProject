@@ -1,16 +1,6 @@
 {"patients": [{
     "firstName": "cat",
-    "lastName": "dog",
+    "lastName": "mouse",
     "id": 1,
-    "vitals": [{
-        "systolicBp": 1,
-        "avpuScore": false,
-        "heartRate": 1,
-        "spo2": 1,
-        "supplementalOxygen": true,
-        "temperature": 1,
-        "diastolicBp": 1,
-        "respRate": 12,
-        "newsScore": 17
-    }]
+    "vitals": []
 }]}
