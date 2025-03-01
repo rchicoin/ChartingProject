@@ -2,8 +2,13 @@ package model;
 
 import java.util.*;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a chart to store all the patients 
-public class Chart {
+public class Chart implements Writable {
 
     List<Patient> chartList;
 
@@ -33,6 +38,19 @@ public class Chart {
     // EFFECTS: returns the entire "chart"/list of patients
     public List<Patient> getChartList() {
         return chartList;
+    }
+
+    // EFFECTS: converts chart data into a JSON object
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
+
+    // EFFECTS: returns patients in this chart as a JSON array
+    private JSONArray vitalsToJson() {
+        return null;
+
     }
 
 }

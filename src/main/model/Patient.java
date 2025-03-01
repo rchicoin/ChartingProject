@@ -2,8 +2,13 @@ package model;
 
 import java.util.*;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a patient with a first name, last name, and a list of their vitals records. 
-public class Patient {
+public class Patient implements Writable {
 
     private String firstName;
     private String lastName;
@@ -56,6 +61,19 @@ public class Patient {
 
     public int getId() {
         return id;
+    }
+
+    // EFFECTS: converts patient data into a JSON object
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
+
+    // EFFECTS: returns vitals in this patient as a JSON array
+    private JSONArray vitalsToJson() {
+        return null;
+
     }
 
 }

@@ -1,20 +1,22 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents the recording of one set of vitals for a patient. 
-public class Vitals {
+public class Vitals implements Writable {
 
-    private int respRate; // respiratory rate
-    private int spo2; // oxygen saturation levels in the blood
-    private boolean supplementalOxygen; // represents if the patient is on supplemental oxygen or not
-    private double temperature; // temperature
-    private int systolicBp; // systolic blood pressure
-    private int diastolicBp; // diastolic blood pressure
-    private boolean avpuScore; // AVPU score is patient awake, do they respond to verbal or painful stimuli, or
-                               // none at all
-    private int heartRate; // heart rate
-    private int newsScore; // final calculated NEWS score based on vitals
+    private int respRate;
+    private int spo2;
+    private boolean supplementalOxygen;
+    private double temperature;
+    private int systolicBp;
+    private int diastolicBp;
+    private boolean avpuScore;
+    private int heartRate;
+    private int newsScore;
 
-    
     // REQUIRES: resp rate >= 0, spo2 >=0 and =<100, temperature must be greater
     // than or equal to 0, systolicBp >=0, diastolicBp>=0.
     // EFFECTS: assigns parameter values to respective vital signs as seen above.
@@ -213,4 +215,10 @@ public class Vitals {
         return heartRate;
     }
 
+    // EFFECTS: converts vitals data into a JSON object
+    @Override
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+    }
 }
