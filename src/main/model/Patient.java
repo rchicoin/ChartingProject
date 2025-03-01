@@ -4,7 +4,6 @@ import java.util.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import persistence.Writable;
 
 // Represents a patient with a first name, last name, and a list of their vitals records. 

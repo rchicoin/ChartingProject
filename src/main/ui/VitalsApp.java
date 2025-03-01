@@ -21,6 +21,8 @@ public class VitalsApp {
     public VitalsApp() {
         chart = new Chart();
         input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runVitalsApp();
     }
 
@@ -350,7 +352,7 @@ public class VitalsApp {
     private void saveChart() {
         try {
             jsonWriter.open();
-            jsonWriter.write(chart);
+            jsonWriter.write(this.chart);
             jsonWriter.close();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);

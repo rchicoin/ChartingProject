@@ -1,10 +1,8 @@
 package model;
 
 import java.util.*;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import persistence.Writable;
 
 // Represents a chart to store all the patients 

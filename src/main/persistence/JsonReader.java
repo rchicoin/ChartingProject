@@ -63,8 +63,9 @@ public class JsonReader {
     private void addPatient(Chart chart, JSONObject jsonObject) {
         String name = jsonObject.getString("firstName");
         String lastname = jsonObject.getString("lastName");
-        int id = Integer.parseInt(jsonObject.getString("id"));
+        int id = jsonObject.getInt("id");
         Patient patient = new Patient(name, lastname, id);
+        chart.addPatient(patient);
         addVitals(chart, patient, jsonObject);
     }
 
@@ -85,15 +86,15 @@ public class JsonReader {
     // then chart
     private void addVital(Chart chart, Patient patient, JSONObject jsonObject) {
 
-        int respRate = Integer.parseInt(jsonObject.getString("respRate"));
-        int spo2 = Integer.parseInt(jsonObject.getString("spo2"));
-        boolean supplementalOxygen = Boolean.parseBoolean(jsonObject.getString("supplementalOxygen"));
-        double temperature = Double.parseDouble(jsonObject.getString("temperature"));
-        int systolicBp = Integer.parseInt(jsonObject.getString("systolicBP"));
-        int diastolicBp = Integer.parseInt(jsonObject.getString("diastolicBp"));
-        boolean avpuScore = Boolean.parseBoolean(jsonObject.getString("avpuScore"));
-        int heartRate = Integer.parseInt(jsonObject.getString("heartRate"));
-        int newsScore = Integer.parseInt(jsonObject.getString("newsScore"));
+        int respRate = jsonObject.getInt("respRate");
+        int spo2 = jsonObject.getInt("spo2");
+        boolean supplementalOxygen = jsonObject.getBoolean("supplementalOxygen");
+        double temperature = jsonObject.getDouble("temperature");
+        int systolicBp = jsonObject.getInt("systolicBp");
+        int diastolicBp = jsonObject.getInt("diastolicBp");
+        boolean avpuScore = jsonObject.getBoolean("avpuScore");
+        int heartRate = jsonObject.getInt("heartRate");
+        int newsScore = jsonObject.getInt("newsScore");
 
         Vitals vital = new Vitals(respRate, spo2, supplementalOxygen, temperature, systolicBp, diastolicBp, avpuScore,
                 heartRate);

@@ -1,10 +1,7 @@
 package persistence;
 
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-
 import org.json.JSONObject;
-
 import java.io.*;
 import model.*;
 

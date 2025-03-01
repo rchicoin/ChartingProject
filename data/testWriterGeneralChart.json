@@ -1,1 +1,60 @@
-{"patients": []}
+{"patients": [
+    {
+        "firstName": "first1",
+        "lastName": "last1",
+        "id": 1,
+        "vitals": [
+            {
+                "systolicBp": 120,
+                "avpuScore": false,
+                "heartRate": 60,
+                "spo2": 96,
+                "supplementalOxygen": false,
+                "temperature": 36.5,
+                "diastolicBp": 80,
+                "respRate": 12,
+                "newsScore": 3
+            },
+            {
+                "systolicBp": 130,
+                "avpuScore": false,
+                "heartRate": 70,
+                "spo2": 98,
+                "supplementalOxygen": true,
+                "temperature": 36.7,
+                "diastolicBp": 90,
+                "respRate": 14,
+                "newsScore": 5
+            }
+        ]
+    },
+    {
+        "firstName": "first2",
+        "lastName": "last2",
+        "id": 2,
+        "vitals": [
+            {
+                "systolicBp": 125,
+                "avpuScore": true,
+                "heartRate": 65,
+                "spo2": 97,
+                "supplementalOxygen": false,
+                "temperature": 36.6,
+                "diastolicBp": 85,
+                "respRate": 13,
+                "newsScore": 0
+            },
+            {
+                "systolicBp": 135,
+                "avpuScore": true,
+                "heartRate": 75,
+                "spo2": 99,
+                "supplementalOxygen": true,
+                "temperature": 36.8,
+                "diastolicBp": 95,
+                "respRate": 15,
+                "newsScore": 2
+            }
+        ]
+    }
+]}

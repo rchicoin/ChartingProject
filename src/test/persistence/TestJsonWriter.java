@@ -2,11 +2,11 @@ package persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Test;
 
 import model.Chart;
 import model.Patient;
@@ -62,6 +62,9 @@ public class TestJsonWriter extends JsonTest {
 
             patient2.addVitals(vital2);
             patient2.addVitals(vital4);
+
+            chart.addPatient(patient1);
+            chart.addPatient(patient2);
 
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralChart.json");
             writer.open();

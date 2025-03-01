@@ -235,7 +235,7 @@ public class Vitals implements Writable {
         json.put("supplementalOxygen", supplementalOxygen);
         json.put("temperature", temperature);
         json.put("systolicBp", systolicBp);
-        json.put("diastolicBp", respRate);
+        json.put("diastolicBp", diastolicBp);
         json.put("avpuScore", avpuScore);
         json.put("heartRate", heartRate);
         json.put("newsScore", newsScore);
