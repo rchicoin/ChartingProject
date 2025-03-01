@@ -1,30 +1,16 @@
-{"patients": [
-    {
-        "firstName": "r",
-        "lastName": "c",
-        "id": 2,
-        "vitals": [{
-            "systolicBp": 2,
-            "avpuScore": true,
-            "heartRate": 4,
-            "spo2": 2,
-            "supplementalOxygen": false,
-            "temperature": 2,
-            "diastolicBp": 12,
-            "respRate": 12,
-            "newsScore": 12
-        }]
-    },
-    {
-        "firstName": "k",
-        "lastName": "c",
-        "id": 3,
-        "vitals": []
-    },
-    {
-        "firstName": "t",
-        "lastName": "c",
-        "id": 5,
-        "vitals": []
-    }
-]}
+{"patients": [{
+    "firstName": "cat",
+    "lastName": "dog",
+    "id": 1,
+    "vitals": [{
+        "systolicBp": 1,
+        "avpuScore": false,
+        "heartRate": 1,
+        "spo2": 1,
+        "supplementalOxygen": true,
+        "temperature": 1,
+        "diastolicBp": 1,
+        "respRate": 12,
+        "newsScore": 17
+    }]
+}]}

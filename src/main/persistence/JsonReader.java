@@ -94,7 +94,6 @@ public class JsonReader {
         int diastolicBp = jsonObject.getInt("diastolicBp");
         boolean avpuScore = jsonObject.getBoolean("avpuScore");
         int heartRate = jsonObject.getInt("heartRate");
-        int newsScore = jsonObject.getInt("newsScore");
 
         Vitals vital = new Vitals(respRate, spo2, supplementalOxygen, temperature, systolicBp, diastolicBp, avpuScore,
                 heartRate);

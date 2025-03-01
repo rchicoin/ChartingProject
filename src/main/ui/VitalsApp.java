@@ -68,7 +68,7 @@ public class VitalsApp {
             getListOfPatientVitals();
         } else if (command.equals("d") && chart.getChartList().size() > 0) {
             saveChart();
-        } else if (command.equals("e") && chart.getChartList().size() > 0) {
+        } else if (command.equals("e")) {
             loadChart();
         } else {
             if (chart.getChartList().size() == 0) {

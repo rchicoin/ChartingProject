@@ -14,7 +14,7 @@ public class JsonWriter {
 
     // EFFECTS: constructs writer to write to desitnation file
     public JsonWriter(String destination) {
-        this.destination= destination;
+        this.destination = destination;
 
     }
 
@@ -22,7 +22,7 @@ public class JsonWriter {
     // EFFECTS: opens writer; throw FileNotFoundException if destination file cant
     // be opened for writing
     public void open() throws FileNotFoundException {
-        writer= new PrintWriter(new File(destination));
+        writer = new PrintWriter(new File(destination));
     }
 
     // MODIFIES: this
