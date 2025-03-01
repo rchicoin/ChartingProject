@@ -3,11 +3,19 @@ package ui;
 import model.*;
 import java.util.*;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 // User interface for patient vital recording 
 public class VitalsApp {
 
+    private static final String JSON_STORE = "./data/chart.json";
     private Chart chart;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: initiates the ability to add patients and vitals to the chart
     public VitalsApp() {
@@ -30,13 +38,15 @@ public class VitalsApp {
             System.out.println("Enter \"a\" to enter a new patient in the chart.");
             System.out.println("Enter \"b\" to add vitals for a patient.");
             System.out.println("Enter \"c\" to get a list of recorded vitals for a patient.");
-            System.out.println("Enter \"d\" to exit.");
+            System.out.println("Enter \"d\" to save the chart to file");
+            System.out.println("Enter \"e\" to load the chart from file");
+            System.out.println("Enter \"f\" to exit.");
             System.out.println();
 
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("d")) {
+            if (command.equals("f")) {
                 selection = false;
             } else {
                 readMainMenuInput(command);
@@ -54,6 +64,10 @@ public class VitalsApp {
             addVitalsToPatient();
         } else if (command.equals("c") && chart.getChartList().size() > 0) {
             getListOfPatientVitals();
+        } else if (command.equals("d") && chart.getChartList().size() > 0) {
+            saveChart();
+        } else if (command.equals("e") && chart.getChartList().size() > 0) {
+            loadChart();
         } else {
             if (chart.getChartList().size() == 0) {
                 System.out.println(
@@ -328,5 +342,31 @@ public class VitalsApp {
             }
         }
         return false;
+    }
+
+    // EFFECTS: saves the chart to a file, catches FileNotFoundException, will
+    // notify if unable to write to JSON_STORE file
+
+    private void saveChart() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(chart);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: loads the chart, catches IOException, will notify if unable to load
+    // chart from JSON_STORE
+    private void loadChart() {
+        try {
+            chart = jsonReader.read();
+            System.out.println("Successfully loaded the chart from: " + JSON_STORE);
+
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+
     }
 }

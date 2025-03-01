@@ -228,7 +228,18 @@ public class Vitals implements Writable {
     // EFFECTS: converts vitals data into a JSON object
     @Override
     public JSONObject toJson() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+        JSONObject json = new JSONObject();
+
+        json.put("respRate", respRate);
+        json.put("spo2", spo2);
+        json.put("supplementalOxygen", supplementalOxygen);
+        json.put("temperature", temperature);
+        json.put("systolicBp", systolicBp);
+        json.put("diastolicBp", respRate);
+        json.put("avpuScore", avpuScore);
+        json.put("heartRate", heartRate);
+        json.put("newsScore", newsScore);
+        
+        return json;
     }
 }

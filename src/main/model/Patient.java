@@ -66,14 +66,23 @@ public class Patient implements Writable {
     // EFFECTS: converts patient data into a JSON object
     @Override
     public JSONObject toJson() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+
+        JSONObject json = new JSONObject();
+        json.put("firstName", firstName);
+        json.put("lastName", lastName);
+        json.put("id", id);
+        json.put("vitals", vitalsToJson());
+        return json;
     }
 
     // EFFECTS: returns vitals in this patient as a JSON array
     public JSONArray vitalsToJson() {
-        return null;
 
+        JSONArray jsonArray = new JSONArray();
+        for (Vitals v : vitals) {
+            jsonArray.put(v.toJson());
+        }
+        return jsonArray;
     }
 
 }

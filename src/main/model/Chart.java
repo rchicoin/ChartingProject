@@ -43,14 +43,19 @@ public class Chart implements Writable {
     // EFFECTS: converts chart data into a JSON object
     @Override
     public JSONObject toJson() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+        JSONObject json = new JSONObject();
+        json.put("patients", patientsToJson());
+        return json;
     }
 
     // EFFECTS: returns patients in this chart as a JSON array
-    public JSONArray vitalsToJson() {
-        return null;
+    public JSONArray patientsToJson() {
+        JSONArray jsonArray = new JSONArray();
 
+        for (Patient p : chartList) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
     }
 
 }
