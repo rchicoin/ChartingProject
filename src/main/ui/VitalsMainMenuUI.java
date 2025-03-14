@@ -1,56 +1,101 @@
 package ui;
 
-import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 import javax.swing.*;
 
+import model.Chart;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
 // Represents a main menu with choices a/b/c/d/e to either enter a new patient, 
 // add vitals to a patient, view a list of patient vitals, and either save or load a chart
-public class VitalsMainMenuUI extends JFrame {
+public class VitalsMainMenuUI extends JFrame implements ActionListener {
 
-    JFrame frame;
-    JPanel mainPanel;
+    private static final String JSON_STORE = "./data/chart.json";
+    private Chart chart;
+    private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+    private JPanel mainPanel;
+    private PatientUI patientPanel;
+    private VitalListUI vitalListPanel;
+    private VitalsUI vitalEntryPanel;
+
     // EFFECTS: constructs the main menu with choices a/b/c/d/e/f
     public VitalsMainMenuUI() {
         super("Budget Cerner App");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500,500);
+        setSize(500, 500);
         setVisible(true);
         setResizable(false);
         setLocationRelativeTo(null);
 
-
         mainPanel();
         add(mainPanel);
-        
+        mainPanel.setVisible(true);
+
+        chart = new Chart();
     }
 
-    public void mainPanel(){
+    public void mainPanel() {
         mainPanel = new JPanel();
 
-        JButton aMakePatient = new JButton("Enter a new Patient");
-        mainPanel.add(aMakePatient);
+        JButton makePatient = new JButton("Enter a new Patient");
+        mainPanel.add(makePatient);
+        makePatient.setActionCommand("NEWPATIENT");
+        makePatient.addActionListener(this);
 
-        JButton bEnterVitals = new JButton("Enter Vitals");
-        mainPanel.add(bEnterVitals);
+        JButton enterVitals = new JButton("Enter Vitals");
+        mainPanel.add(enterVitals);
+        enterVitals.setActionCommand("ENTERVITALS");
+        enterVitals.addActionListener(this);
 
-        JButton cViewVitalList = new JButton("View Patients Vitals List");
-        mainPanel.add(cViewVitalList);
+        JButton viewVitalList = new JButton("View Patients Vitals List");
+        mainPanel.add(viewVitalList);
+        viewVitalList.setActionCommand("VIEWVITALS");
+        viewVitalList.addActionListener(this);
 
-        JButton dSaveApplication = new JButton("Save Chart");
-        mainPanel.add(dSaveApplication);
+        JButton saveApplication = new JButton("Save Chart");
+        mainPanel.add(saveApplication);
+        saveApplication.setActionCommand("SAVECHART");
+        saveApplication.addActionListener(this);
 
-        JButton eLoadApplication = new JButton("Load Previous Chart");
-        mainPanel.add(eLoadApplication);
+        JButton loadApplication = new JButton("Load Previous Chart");
+        mainPanel.add(loadApplication);
+        loadApplication.setActionCommand("LOADCHART");
+        loadApplication.addActionListener(this);
 
-        JButton fExitApplication = new JButton("Exit");
-        mainPanel.add(fExitApplication);
     }
+
 
     // EFFECTS: handles the users choices based on the main menu buttons, and
     // re-directs to the relevant UI panel
-    public void buttonHandler() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("NEWPATIENT")) {
+            this.remove(mainPanel);
+            patientPanel = new PatientUI(this, chart, mainPanel);
+            this.add(patientPanel);
+        } else if (e.getActionCommand().equals("ENTERVITALS")) {
+            this.remove(mainPanel);
+            vitalEntryPanel = new VitalsUI();
+            this.add(vitalEntryPanel);
+        } else if (e.getActionCommand().equals("VIEWVITALS")) {
+            this.remove(mainPanel);
+            vitalListPanel = new VitalListUI();
+            this.add(vitalListPanel);
+        } else if (e.getActionCommand().equals("SAVECHART")) {
+            System.out.println("SAVE CHART");
+        } else if (e.getActionCommand().equals("LOADCHART")) {
+            System.out.println("LOAD CHART");
+        }
 
+        revalidate();
+        repaint();
     }
 
     // EFFECTS: runs the relevant chart
