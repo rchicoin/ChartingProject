@@ -82,11 +82,11 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
             this.add(patientPanel);
         } else if (e.getActionCommand().equals("ENTERVITALS")) {
             this.remove(mainPanel);
-            vitalEntryPanel = new VitalsUI();
+            vitalEntryPanel = new VitalsUI(this, chart, mainPanel);
             this.add(vitalEntryPanel);
         } else if (e.getActionCommand().equals("VIEWVITALS")) {
             this.remove(mainPanel);
-            vitalListPanel = new VitalListUI();
+            vitalListPanel = new VitalListUI(this, chart, mainPanel);
             this.add(vitalListPanel);
         } else if (e.getActionCommand().equals("SAVECHART")) {
             System.out.println("SAVE CHART");

@@ -12,15 +12,17 @@ import model.Patient;
 // Constructs a panel where the user can enter a new patient
 public class PatientUI extends JPanel implements ActionListener {
 
-    VitalsMainMenuUI mainFrame;
-    Chart chart;
-    JPanel mainPanel;
-    String first1;
-    String last1;
-    int idint;
-    JTextField first;
-    JTextField last;
-    JTextField id;
+    private VitalsMainMenuUI mainFrame;
+    private Chart chart;
+    private JPanel mainPanel;
+
+    private String first1;
+    private String last1;
+    private int idint;
+
+    private JTextField first;
+    private JTextField last;
+    private JTextField id;
 
     // EFFECTS: creates a panel where a user can enter a new patient
     public PatientUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
