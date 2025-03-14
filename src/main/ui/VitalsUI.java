@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 
 import model.Chart;
 import model.Patient;
+import model.Vitals;
 
 // Constructs a panel where the user can add vitals to a patients chart
 public class VitalsUI extends JPanel implements ActionListener {
@@ -26,7 +27,6 @@ public class VitalsUI extends JPanel implements ActionListener {
     private int diastolicBp;
     private boolean avpuScore;
     private int heartRate;
-    private int newsScore;
 
     private JTextField patientIdT;
     private JTextField respRateT;
@@ -51,7 +51,7 @@ public class VitalsUI extends JPanel implements ActionListener {
         supplementalOxygenT = new JTextField("enter y or n based on oxygenation status");
         temperatureT = new JTextField("enter temperature");
         systolicBpT = new JTextField("enter systolic blood pressure");
-        diastolicBpT = new JTextField("enter diastolic blood pressure ");
+        diastolicBpT = new JTextField("enter diastolic blood pressure");
         avpuScoreT = new JTextField("enter AVPU SCORE");
         heartRateT = new JTextField("enter heart rate");
 
@@ -60,6 +60,10 @@ public class VitalsUI extends JPanel implements ActionListener {
         next.setActionCommand("ADDVITALS");
         next.addActionListener(this);
 
+        addButtons(next);
+    }
+
+    private void addButtons(JButton next) {
         add(patientIdT);
         add(respRateT);
         add(spo2T);
@@ -77,14 +81,20 @@ public class VitalsUI extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("ADDVITALS")) {
 
             patientId = returnInteger(patientIdT.getText());
+            Patient patient = chart.getPatient(patientId);
+
             respRate = returnInteger(respRateT.getText());
             spo2 = returnInteger(spo2T.getText());
-            private boolean supplementalOxygen;
+            supplementalOxygen = returnSupplementalOxygen(supplementalOxygenT.getText());
             temperature = returnDouble(temperatureT.getText());
             systolicBp = returnInteger(systolicBpT.getText());
             diastolicBp = returnInteger(diastolicBpT.getText());
-            private boolean avpuScore;
+            avpuScore = returnAvpu(avpuScoreT.getText());
             heartRate = returnInteger(heartRateT.getText());
+
+            Vitals vitals = new Vitals(respRate, spo2, supplementalOxygen, temperature, systolicBp, diastolicBp,
+                    avpuScore, heartRate);
+            patient.addVitals(vitals);
 
         }
 
@@ -102,5 +112,23 @@ public class VitalsUI extends JPanel implements ActionListener {
     public double returnDouble(String string) {
         double dbl = Double.parseDouble(string);
         return dbl;
+    }
+
+    public boolean returnSupplementalOxygen(String string) {
+        string = string.toLowerCase();
+        if (string.equals("y")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean returnAvpu(String string) {
+        string = string.toLowerCase();
+        if (string.equals("a")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
