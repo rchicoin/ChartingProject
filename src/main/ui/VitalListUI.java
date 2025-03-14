@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +12,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import model.Chart;
+import model.Patient;
+import model.Vitals;
 
 // Constructs a panel where the user can view a list of the selected  patients vitals
 public class VitalListUI extends JPanel implements ActionListener {
@@ -19,9 +23,9 @@ public class VitalListUI extends JPanel implements ActionListener {
     private JPanel mainPanel;
 
     private int patientId;
-    JTextField patientIdT;
-    JTextArea textArea;
-    JScrollPane scrollPane;
+    private JTextField patientIdT;
+    private JTextArea textArea;
+    private JScrollPane scrollPane;
 
     // EFFECTS: creates a panel where first a patient is is verified and then a list
     // of previously entered vitals is displayed
@@ -30,19 +34,44 @@ public class VitalListUI extends JPanel implements ActionListener {
         this.chart = chart;
         this.mainPanel = mainPanel;
 
+        patientIdT = new JTextField("enter id");
+        add(patientIdT);
+
         JButton getPatientButton = new JButton("Enter the patients ID");
         add(getPatientButton);
         getPatientButton.setActionCommand("GETPATIENT");
         getPatientButton.addActionListener(this);
 
-        textArea = new JTextArea(300,300);
-        scrollPane = new JScrollPane(textArea);
+        JButton backToMain = new JButton("Back to Main Menu");
+        add(backToMain);
+        backToMain.setActionCommand("BACK");
+        backToMain.addActionListener(this);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("GETPATIENT")) {
             patientId = returnInteger(patientIdT.getText());
+            Patient patient = chart.getPatient(patientId);
+
+            textArea = new JTextArea(vitalsToString(patient));
+            textArea.setWrapStyleWord(true);
+            textArea.setLineWrap(true);
+            textArea.setEditable(false);
+
+            scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(300,300));
+            this.add(scrollPane, BorderLayout.CENTER);
+            printVitalsList(patient);
+            revalidate();
+            repaint();
+        }
+        if (e.getActionCommand().equals("BACK")) {
+            mainFrame.remove(this);
+            mainFrame.add(mainPanel);
+            mainFrame.revalidate();
+            mainFrame.repaint();
         }
 
     }
@@ -51,4 +80,41 @@ public class VitalListUI extends JPanel implements ActionListener {
         int integer = Integer.parseInt(string);
         return integer;
     }
+
+    public String vitalsToString(Patient patient) {
+        String text = "";
+        int i = 0;
+        for (Vitals vital : patient.getVitalList()) {
+            text = text.concat("Recording: " + i + "\n" + "Respiratory Rate:" + vital.getRespRate() + "\n" + "Spo2:"
+                    + vital.getSpo2() + "\n" + "Supplemental O2 status:" + vital.getSupplementalOxygen() + "\n"
+                    + "Temperature:" + vital.getTemperature() + "\n" + "Systolic Blood Pressure:"
+                    + vital.getSystolicBp() + "\n" + "Diastolic Blood Pressure:" + vital.getDiastolicBp() + "\n"
+                    + "Was the patient alert?:" + vital.getAvpu() + "\n" + "Heart Rate:" + vital.getRespRate() + "\n"
+                    + "=========================================================================="+"\n");
+            i++;
+        }
+        return text;
+
+    }
+
+    private void printVitalsList(Patient patient) {
+        int i = 0;
+        for (Vitals vital : patient.getVitalList()) {
+            System.out.println("Recording: " + i);
+            System.out.println("Respiratory Rate:" + vital.getRespRate());
+            System.out.println("Spo2:" + vital.getSpo2());
+            System.out.println("Supplemental O2 status:" + vital.getSupplementalOxygen());
+            System.out.println("Temperature:" + vital.getTemperature());
+            System.out.println("Systolic Blood Pressure:" + vital.getSystolicBp());
+            System.out.println("Diastolic Blood Pressure:" + vital.getDiastolicBp());
+            System.out.println("Was the patient alert?:" + vital.getAvpu());
+            System.out.println("Heart Rate:" + vital.getRespRate());
+            System.out.println("==========================================================================");
+            System.out.println();
+            i++;
+        }
+    }
+
+
+
 }
