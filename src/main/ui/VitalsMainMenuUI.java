@@ -2,7 +2,8 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -16,13 +17,14 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
 
     private static final String JSON_STORE = "./data/chart.json";
     private Chart chart;
-    private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     private JPanel mainPanel;
     private PatientUI patientPanel;
-    private VitalListUI vitalListPanel;
+    private VitalListUIOld vitalListPanel;
+    private VitalListUINew vitalListPanelNew;
+    private VitalListUIAbove5 vitalListPanelAbove5;
     private VitalsUI vitalEntryPanel;
 
     // EFFECTS: constructs the main menu with choices a/b/c/d/e/f
@@ -39,6 +41,8 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
         mainPanel.setVisible(true);
 
         chart = new Chart();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     public void mainPanel() {
@@ -54,10 +58,20 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
         enterVitals.setActionCommand("ENTERVITALS");
         enterVitals.addActionListener(this);
 
-        JButton viewVitalList = new JButton("View Patients Vitals List");
+        JButton viewVitalList = new JButton("View Patients Vitals List Oldest to Newest");
         mainPanel.add(viewVitalList);
-        viewVitalList.setActionCommand("VIEWVITALS");
+        viewVitalList.setActionCommand("VIEWVITALSOLD");
         viewVitalList.addActionListener(this);
+
+        JButton viewVitalListNew = new JButton("View Patients Vitals List Newest to Oldest");
+        mainPanel.add(viewVitalListNew);
+        viewVitalListNew.setActionCommand("VIEWVITALSNEW");
+        viewVitalListNew.addActionListener(this);
+
+        JButton viewVitalListAbove5 = new JButton("View Patients Vitals List NEWS Score Above 5");
+        mainPanel.add(viewVitalListAbove5);
+        viewVitalListAbove5.setActionCommand("VIEWVITALSABOVE5");
+        viewVitalListAbove5.addActionListener(this);
 
         JButton saveApplication = new JButton("Save Chart");
         mainPanel.add(saveApplication);
@@ -71,7 +85,6 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
 
     }
 
-
     // EFFECTS: handles the users choices based on the main menu buttons, and
     // re-directs to the relevant UI panel
     @Override
@@ -84,13 +97,23 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
             this.remove(mainPanel);
             vitalEntryPanel = new VitalsUI(this, chart, mainPanel);
             this.add(vitalEntryPanel);
-        } else if (e.getActionCommand().equals("VIEWVITALS")) {
+        } else if (e.getActionCommand().equals("VIEWVITALSOLD")) {
             this.remove(mainPanel);
-            vitalListPanel = new VitalListUI(this, chart, mainPanel);
+            vitalListPanel = new VitalListUIOld(this, chart, mainPanel);
             this.add(vitalListPanel);
+        } else if (e.getActionCommand().equals("VIEWVITALSNEW")) {
+            this.remove(mainPanel);
+            vitalListPanelNew = new VitalListUINew(this, chart, mainPanel);
+            this.add(vitalListPanelNew);
+        } else if (e.getActionCommand().equals("VIEWVITALSABOVE5")) {
+            this.remove(mainPanel);
+            vitalListPanelAbove5 = new VitalListUIAbove5(this, chart, mainPanel);
+            this.add(vitalListPanelAbove5);
         } else if (e.getActionCommand().equals("SAVECHART")) {
+            saveChart();
             System.out.println("SAVE CHART");
         } else if (e.getActionCommand().equals("LOADCHART")) {
+            loadChart();
             System.out.println("LOAD CHART");
         }
 
@@ -101,6 +124,31 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
     // EFFECTS: runs the relevant chart
     public static void main(String[] args) {
         new VitalsMainMenuUI();
+
+    }
+
+    // EFFECTS: saves the chart to a file, catches FileNotFoundException, will
+    // notify if unable to write to JSON_STORE file
+    private void saveChart() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(this.chart);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: loads the chart, catches IOException, will notify if unable to load
+    // chart from JSON_STORE
+    private void loadChart() {
+        try {
+            chart = jsonReader.read();
+            System.out.println("Successfully loaded the chart from: " + JSON_STORE);
+
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
 
     }
 }

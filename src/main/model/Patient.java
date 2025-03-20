@@ -12,7 +12,7 @@ public class Patient implements Writable {
     private String firstName;
     private String lastName;
     private int id;
-    List<Vitals> vitals;
+    ArrayList<Vitals> vitals;
 
     // REQUIRES: the patients first and last name must not be empty (no empty
     // strings) and the same patient id cannot be entered twice.
@@ -54,7 +54,7 @@ public class Patient implements Writable {
         return lastName;
     }
 
-    public List<Vitals> getVitalList() {
+    public ArrayList<Vitals> getVitalList() {
         return vitals;
     }
 

@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,7 +18,7 @@ import model.Patient;
 import model.Vitals;
 
 // Constructs a panel where the user can view a list of the selected  patients vitals
-public class VitalListUI extends JPanel implements ActionListener {
+public class VitalListUINew extends JPanel implements ActionListener {
 
     private VitalsMainMenuUI mainFrame;
     private Chart chart;
@@ -29,7 +31,7 @@ public class VitalListUI extends JPanel implements ActionListener {
 
     // EFFECTS: creates a panel where first a patient is is verified and then a list
     // of previously entered vitals is displayed
-    public VitalListUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
+    public VitalListUINew(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
@@ -61,9 +63,8 @@ public class VitalListUI extends JPanel implements ActionListener {
             textArea.setEditable(false);
 
             scrollPane = new JScrollPane(textArea);
-            scrollPane.setPreferredSize(new Dimension(300,300));
+            scrollPane.setPreferredSize(new Dimension(300, 300));
             this.add(scrollPane, BorderLayout.CENTER);
-            printVitalsList(patient);
             revalidate();
             repaint();
         }
@@ -83,38 +84,23 @@ public class VitalListUI extends JPanel implements ActionListener {
 
     public String vitalsToString(Patient patient) {
         String text = "";
-        int i = 0;
-        for (Vitals vital : patient.getVitalList()) {
+        List<Vitals> vitalList = patient.getVitalList();
+        Collections.reverse(vitalList);
+        int i = vitalList.size();
+
+        for (Vitals vital : vitalList) {
             text = text.concat("Recording: " + i + "\n" + "Respiratory Rate:" + vital.getRespRate() + "\n" + "Spo2:"
                     + vital.getSpo2() + "\n" + "Supplemental O2 status:" + vital.getSupplementalOxygen() + "\n"
                     + "Temperature:" + vital.getTemperature() + "\n" + "Systolic Blood Pressure:"
                     + vital.getSystolicBp() + "\n" + "Diastolic Blood Pressure:" + vital.getDiastolicBp() + "\n"
-                    + "Was the patient alert?:" + vital.getAvpu() + "\n" + "Heart Rate:" + vital.getRespRate() + "\n"
-                    + "=========================================================================="+"\n");
-            i++;
+                    + "Was the patient alert?:" + vital.getAvpu() + "\n" + "Heart Rate:" + vital.getRespRate() + "\n" +
+                    "NEWS Score:" + vital.getNewsScore() + "\n"
+                    + "======================================" + "\n");
+            i--;
         }
+        Collections.reverse(vitalList);
         return text;
 
     }
-
-    private void printVitalsList(Patient patient) {
-        int i = 0;
-        for (Vitals vital : patient.getVitalList()) {
-            System.out.println("Recording: " + i);
-            System.out.println("Respiratory Rate:" + vital.getRespRate());
-            System.out.println("Spo2:" + vital.getSpo2());
-            System.out.println("Supplemental O2 status:" + vital.getSupplementalOxygen());
-            System.out.println("Temperature:" + vital.getTemperature());
-            System.out.println("Systolic Blood Pressure:" + vital.getSystolicBp());
-            System.out.println("Diastolic Blood Pressure:" + vital.getDiastolicBp());
-            System.out.println("Was the patient alert?:" + vital.getAvpu());
-            System.out.println("Heart Rate:" + vital.getRespRate());
-            System.out.println("==========================================================================");
-            System.out.println();
-            i++;
-        }
-    }
-
-
 
 }

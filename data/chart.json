@@ -1,6 +1,29 @@
 {"patients": [{
-    "firstName": "cat",
-    "lastName": "mouse",
-    "id": 1,
-    "vitals": []
+    "firstName": "enter first name",
+    "lastName": "enter first name",
+    "id": 2,
+    "vitals": [
+        {
+            "systolicBp": 120,
+            "avpuScore": true,
+            "heartRate": 145,
+            "spo2": 99,
+            "supplementalOxygen": false,
+            "temperature": 36,
+            "diastolicBp": 80,
+            "respRate": 18,
+            "newsScore": 4
+        },
+        {
+            "systolicBp": 90,
+            "avpuScore": true,
+            "heartRate": 150,
+            "spo2": 85,
+            "supplementalOxygen": true,
+            "temperature": 36.5,
+            "diastolicBp": 74,
+            "respRate": 22,
+            "newsScore": 13
+        }
+    ]
 }]}
