@@ -14,10 +14,18 @@ The targeted audience would be nurses. Although it would not be useful in the re
 I currently work as a nurse part-time; we chart this information in a platform called CST Cerner which also automatically calculates this score and provides alerts. However, there is no option to indicate that a NEWS score is a patients baseline/does not need to be reported to the doctor (as the doctor would already have been made aware after the first NEWS alert). Currently in CST Cerner for medical-surgical specific floors (non-ICU) documentation this makes it so that we are automatically directed to a place to document that we notified the doctor with no other options, forcing us to chart inaccurately. I would like to provide an option in my own project that allows for the identification of a baseline bypassing the need for alerts and only alerting again if the baseline score has increased.
 
 ##### User Stories:
--	As a user, I want to be able to add vital signs readings to a patients chart 
+-	As a user, I want to be able to add multiple vital signs readings to a patients record 
 -	As a user, I want to be able to view a list of recorded vital signs for a patient 
 -	As a user, I want to be able to have a NEWS score calculated for me 
 -	As a user, I want to be alerted properly if my NEWS score requires intervention 
--	As a user, I want to be able to create individual charts for individual patients 
+-	As a user, I want to be able to add multiple patients to the chart  
 -	As a user, I want to be able to save my chart/patients and their corresponding vitals to a file (If I chose to do so)
 -	As a user, I want to be able to load my chart/patients and their corresponding vitals to a file (If I chose to do so)
+
+##### Instructions for End User:
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the "View Patients Vitals List Oldest to Newest" button on the main menu 
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking the "View Patients Vitals List Newest to Oldest" button on the main menu 
+- You can generate the third action related to the user story "adding multiple Xs to a Y" by clicking the "View Patients Vitals List NEWS Score Above 5" button on the main menu 
+- You can locate my visual component by entering vitals for a patient that have a NEWS score above 5, and then selecting that they are not within the patients baseline. 
+- You can save the state of my application by clicking the "Save Chart" button on the main menu
+- You can reload the state of my application by clicking the "Load Previous Chart" button on the main menu 

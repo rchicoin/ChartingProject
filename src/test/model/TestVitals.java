@@ -243,4 +243,9 @@ public class TestVitals {
         testVitals.setDiastolicBp(85);
         assertEquals(85, testVitals.getDiastolicBp());
     }
+
+    @Test
+    void testGetNewsScore(){
+        assertEquals(0,testVitals.calculateNewsScore(12, 99, false, 36.5, 120, 80, false, 60));
+    }
 }

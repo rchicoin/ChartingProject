@@ -40,7 +40,7 @@ public class Vitals implements Writable {
     public int calculateNewsScore(int respRate, int spo2, boolean supplementalOxygen, double temperature,
             int systolicBp,
             int diastolicBp, boolean avpuScore, int heartRate) {
-        int score = calculateRespRate() + calculateSpo2() + calculateSupplementalOxygen() + calculateTemperature()
+            int score = calculateRespRate() + calculateSpo2() + calculateSupplementalOxygen() + calculateTemperature()
                 + calculateSystolicBp() + calculateAvpuScore() + calculateHeartRate();
         return score;
 
