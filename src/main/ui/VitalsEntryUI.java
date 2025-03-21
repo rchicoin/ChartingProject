@@ -52,6 +52,8 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
     private JLabel diastolicPrompt;
     private JLabel avpuPrompt;
     private JLabel heartRatePrompt;
+    private JLabel error;
+    private JLabel idError;
 
     // EFFECTS: creates a panel where first a patient is is verified and then vitals
     // information can be entered into a field sequentially
@@ -70,6 +72,13 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
         next.setActionCommand("ADDVITALS");
         next.addActionListener(this);
         addButtonsAndLabels(next);
+
+        addErrorMessages();
+    }
+
+    private void addErrorMessages() {
+        error = new JLabel("Only enter whole numbers for all fields except temperature.");
+        idError = new JLabel("That patient ID does not exist. Try again.");
     }
 
     // MODIFIES: this
@@ -101,7 +110,8 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds all textfields and labels created in the constructor to the panel itself.
+    // EFFECTS: adds all textfields and labels created in the constructor to the
+    // panel itself.
     private void addButtonsAndLabels(JButton next) {
         add(idPrompt);
         add(patientIdT);
@@ -142,26 +152,55 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ADDVITALS")) {
+            try {
+                patientId = returnInteger(patientIdT.getText());
+                Patient patient = chart.getPatient(patientId);
+                if (patient == null) {
+                    throw new Exception();
+                }
 
-            patientId = returnInteger(patientIdT.getText());
-            Patient patient = chart.getPatient(patientId);
+                readInformationFromTextFieldsAndConvertToCorrectValuesForVitals();
 
-            respRate = returnInteger(respRateT.getText());
-            spo2 = returnInteger(spo2T.getText());
-            supplementalOxygen = returnSupplementalOxygen(supplementalOxygenT.getText());
-            temperature = returnDouble(temperatureT.getText());
-            systolicBp = returnInteger(systolicBpT.getText());
-            diastolicBp = returnInteger(diastolicBpT.getText());
-            avpuScore = returnAvpu(avpuScoreT.getText());
-            heartRate = returnInteger(heartRateT.getText());
+                Vitals vitals = new Vitals(respRate, spo2, supplementalOxygen, temperature, systolicBp, diastolicBp,
+                        avpuScore, heartRate);
+                patient.addVitals(vitals);
 
-            Vitals vitals = new Vitals(respRate, spo2, supplementalOxygen, temperature, systolicBp, diastolicBp,
-                    avpuScore, heartRate);
-            patient.addVitals(vitals);
+                determineNextPanel(vitals);
+            } catch (NumberFormatException e1) {
+                wrongValueEntryErrorHandling();
 
-            determineNextPanel(vitals);
+            } catch (Exception e1) {
+                patientDoesNotExistErrorHandling();
+            }
 
         }
+    }
+
+    private void readInformationFromTextFieldsAndConvertToCorrectValuesForVitals() {
+        respRate = returnInteger(respRateT.getText());
+        spo2 = returnInteger(spo2T.getText());
+        supplementalOxygen = returnSupplementalOxygen(supplementalOxygenT.getText());
+        temperature = returnDouble(temperatureT.getText());
+        systolicBp = returnInteger(systolicBpT.getText());
+        diastolicBp = returnInteger(diastolicBpT.getText());
+        avpuScore = returnAvpu(avpuScoreT.getText());
+        heartRate = returnInteger(heartRateT.getText());
+    }
+
+    private void wrongValueEntryErrorHandling() {
+        add(error);
+        idError.setVisible(false);
+        error.setVisible(true);
+        revalidate();
+        repaint();
+    }
+
+    private void patientDoesNotExistErrorHandling() {
+        add(idError);
+        error.setVisible(false);
+        idError.setVisible(true);
+        revalidate();
+        repaint();
     }
 
     // MODIFIES: mainFrame

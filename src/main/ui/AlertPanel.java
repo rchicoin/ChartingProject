@@ -18,7 +18,6 @@ import model.Chart;
 //when determining if the entered vitals were within the patients baseline. 
 public class AlertPanel extends JPanel implements ActionListener {
     private VitalsMainMenuUI mainFrame;
-    private Chart chart;
     private JPanel mainPanel;
     private JLabel warningLabel;
 
@@ -26,7 +25,6 @@ public class AlertPanel extends JPanel implements ActionListener {
     // not their baseline.
     public AlertPanel(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
         this.mainFrame = mainFrame;
-        this.chart = chart;
         this.mainPanel = mainPanel;
         
         setLayout(new BorderLayout());

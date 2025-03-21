@@ -3,7 +3,6 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,7 +40,6 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
-        //setLayout(new GridLayout(0, 1));
 
         Border border = BorderFactory.createLineBorder(Color.BLUE, 10);
         setBorder(border);
@@ -52,7 +50,7 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
         patientIdT = new JTextField(5);
         add(patientIdT);
 
-        JButton getPatientButton = new JButton("Enter the patients ID");
+        JButton getPatientButton = new JButton("Enter");
         add(getPatientButton);
         getPatientButton.setActionCommand("GETPATIENT");
         getPatientButton.addActionListener(this);
