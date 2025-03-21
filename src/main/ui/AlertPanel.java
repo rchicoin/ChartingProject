@@ -28,7 +28,9 @@ public class AlertPanel extends JPanel implements ActionListener {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
+        
         setLayout(new BorderLayout());
+
         Border border = BorderFactory.createLineBorder(Color.RED, 10);
         setBorder(border);
 
@@ -38,7 +40,6 @@ public class AlertPanel extends JPanel implements ActionListener {
         warningLabel.setHorizontalTextPosition(JLabel.CENTER);
 
         JButton back = new JButton("Back to Main Menu");
-
         back.setActionCommand("BACKTOMAIN");
         back.addActionListener(this);
         add(back, BorderLayout.CENTER);

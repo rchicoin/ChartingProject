@@ -36,12 +36,11 @@ public class BaseLinePanel extends JPanel implements ActionListener {
         add(baselinePrompt);
 
         JButton yes = new JButton("Yes");
-        JButton no = new JButton("No");
-
         yes.setActionCommand("RETURNTOMAIN");
         yes.addActionListener(this);
         add(yes);
 
+        JButton no = new JButton("No");
         no.setActionCommand("SETOFFALERT");
         no.addActionListener(this);
         add(no);

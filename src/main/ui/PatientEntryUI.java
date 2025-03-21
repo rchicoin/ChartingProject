@@ -34,6 +34,7 @@ public class PatientEntryUI extends JPanel implements ActionListener {
     private JLabel firstPrompt;
     private JLabel lastPrompt;
     private JLabel error;
+    private JLabel idError;
 
     // EFFECTS: creates a panel where a user can enter a new patient
     public PatientEntryUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
@@ -64,12 +65,17 @@ public class PatientEntryUI extends JPanel implements ActionListener {
         add(last);
 
         JButton next = new JButton("Enter/Next");
-
         next.setActionCommand("ADDPATIENT");
         next.addActionListener(this);
-
         add(next);
 
+        addErrorMessages();
+
+    }
+
+    private void addErrorMessages() {
+        error = new JLabel("Please only enter numbers for the patient ID");
+        idError = new JLabel("That patient ID already exists in the chart. Please enter a different one.");
     }
 
     // MODIFIES: chart, mainFrame
@@ -85,20 +91,48 @@ public class PatientEntryUI extends JPanel implements ActionListener {
                 String id1 = id.getText();
                 idint = Integer.parseInt(id1);
                 Patient patient = new Patient(first1, last1, idint);
+                checkForPatientId();
+                
                 chart.addPatient(patient);
-
-                mainFrame.remove(this);
-                mainFrame.add(mainPanel);
-                mainFrame.revalidate();
-                mainFrame.repaint();
+                updateMainFrameToMainMenu();
             } catch (NumberFormatException e1) {
-                error = new JLabel("Please only enter numbers for the patient ID");
-                add(error);
-                revalidate();
-                repaint();
+                wrongValueIdEntryErrorHandling();
+            } catch (Exception e3) {
+                idDuplicateErrorHandling();
             }
         }
 
+    }
+
+    private void idDuplicateErrorHandling() {
+        add(idError);
+        error.setVisible(false);
+        idError.setVisible(true);
+        revalidate();
+        repaint();
+    }
+
+    private void wrongValueIdEntryErrorHandling() {
+        add(error);
+        idError.setVisible(false);
+        error.setVisible(true);
+        revalidate();
+        repaint();
+    }
+
+    private void updateMainFrameToMainMenu() {
+        mainFrame.remove(this);
+        mainFrame.add(mainPanel);
+        mainFrame.revalidate();
+        mainFrame.repaint();
+    }
+
+    private void checkForPatientId() throws Exception {
+        for (Patient p : chart.getChartList()) {
+            if (p.getId() == idint) {
+                throw new Exception();
+            }
+        }
     }
 
 }

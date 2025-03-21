@@ -32,6 +32,8 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
     private JTextArea textArea;
     private JScrollPane scrollPane;
     private JLabel idPrompt;
+    private JLabel error;
+    private JLabel idError;
 
     // EFFECTS: creates a panel where first a patient is is verified and then a list
     // of previously entered vitals is displayed with NEWS score above 5
@@ -39,7 +41,7 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
-        setLayout(new GridLayout(0, 1));
+        //setLayout(new GridLayout(0, 1));
 
         Border border = BorderFactory.createLineBorder(Color.BLUE, 10);
         setBorder(border);
@@ -60,6 +62,13 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
         backToMain.setActionCommand("BACK");
         backToMain.addActionListener(this);
 
+        addErrorMessages();
+
+    }
+
+    private void addErrorMessages() {
+        error = new JLabel("Please only enter numbers for the patient ID");
+        idError = new JLabel("That patient ID does not exist. Try again.");
     }
 
     // REQUIRES: the patient ID must be valid/present in the chart
@@ -71,19 +80,24 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("GETPATIENT")) {
-            patientId = returnInteger(patientIdT.getText());
-            Patient patient = chart.getPatient(patientId);
+            try {
+                patientId = returnInteger(patientIdT.getText());
 
-            textArea = new JTextArea(vitalsToString(patient));
-            textArea.setWrapStyleWord(true);
-            textArea.setLineWrap(true);
-            textArea.setEditable(false);
+                Patient patient = chart.getPatient(patientId);
+                if (patient == null) {
+                    throw new Exception();
+                }
 
-            scrollPane = new JScrollPane(textArea);
-            scrollPane.setPreferredSize(new Dimension(300, 300));
-            this.add(scrollPane, BorderLayout.CENTER);
-            revalidate();
-            repaint();
+                setUpTextArea(patient);
+                setUpScrollPane();
+                revalidate();
+                repaint();
+            } catch (NumberFormatException e1) {
+                wrongValueIdEntryErrorHandling();
+
+            } catch (Exception e1) {
+                patientDoesNotExistErrorHandling();
+            }
         }
         if (e.getActionCommand().equals("BACK")) {
             mainFrame.remove(this);
@@ -92,6 +106,35 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
             mainFrame.repaint();
         }
 
+    }
+
+    private void setUpScrollPane() {
+        scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(300, 300));
+        this.add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private void setUpTextArea(Patient patient) {
+        textArea = new JTextArea(vitalsToString(patient));
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+        textArea.setEditable(false);
+    }
+
+    private void wrongValueIdEntryErrorHandling() {
+        add(error);
+        idError.setVisible(false);
+        error.setVisible(true);
+        revalidate();
+        repaint();
+    }
+
+    private void patientDoesNotExistErrorHandling() {
+        add(idError);
+        error.setVisible(false);
+        idError.setVisible(true);
+        revalidate();
+        repaint();
     }
 
     // REQUIRES: the string must only contain digits
@@ -113,7 +156,7 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
                         + "Temperature:" + vital.getTemperature() + "\n" + "Systolic Blood Pressure:"
                         + vital.getSystolicBp() + "\n" + "Diastolic Blood Pressure:" + vital.getDiastolicBp() + "\n"
                         + "Was the patient alert?:" + vital.getAvpu() + "\n" + "Heart Rate:" + vital.getRespRate()
-                        + "\n" 
+                        + "\n"
                         + "NEWS Score:" + vital.getNewsScore() + "\n"
                         + "======================================" + "\n");
             }
