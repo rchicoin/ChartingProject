@@ -73,6 +73,8 @@ public class PatientEntryUI extends JPanel implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates new JLabels specifically for the error messages.
     private void addErrorMessages() {
         error = new JLabel("Please only enter numbers for the patient ID");
         idError = new JLabel("That patient ID already exists in the chart. Please enter a different one.");
@@ -92,7 +94,7 @@ public class PatientEntryUI extends JPanel implements ActionListener {
                 idint = Integer.parseInt(id1);
                 Patient patient = new Patient(first1, last1, idint);
                 checkForPatientId();
-                
+
                 chart.addPatient(patient);
                 updateMainFrameToMainMenu();
             } catch (NumberFormatException e1) {
@@ -104,6 +106,9 @@ public class PatientEntryUI extends JPanel implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Notifies the user if the ID is already taken. Returns the right
+    // error message and removes unrelated error message
     private void idDuplicateErrorHandling() {
         add(idError);
         error.setVisible(false);
@@ -112,6 +117,10 @@ public class PatientEntryUI extends JPanel implements ActionListener {
         repaint();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Notifies the user if the ID value entered is invalid (for example if
+    // it contains characters), returns the corresponding error message and removes
+    // unrelated error message
     private void wrongValueIdEntryErrorHandling() {
         add(error);
         idError.setVisible(false);
@@ -120,6 +129,9 @@ public class PatientEntryUI extends JPanel implements ActionListener {
         repaint();
     }
 
+    // MODIFIES: this, mainFrame
+    // EFFECTS: removes this panel from the pain frame, returns to the main menu
+    // (mainPanel)
     private void updateMainFrameToMainMenu() {
         mainFrame.remove(this);
         mainFrame.add(mainPanel);
@@ -127,6 +139,8 @@ public class PatientEntryUI extends JPanel implements ActionListener {
         mainFrame.repaint();
     }
 
+    // EFFECTS: checks to see if a patient ID exists in the chart, if the id is
+    // present an error is thrown (checking for duplicate ids)
     private void checkForPatientId() throws Exception {
         for (Patient p : chart.getChartList()) {
             if (p.getId() == idint) {

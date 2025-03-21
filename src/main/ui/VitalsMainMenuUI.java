@@ -120,10 +120,8 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
             this.add(vitalListPanelAbove5);
         } else if (e.getActionCommand().equals("SAVECHART")) {
             saveChart();
-            System.out.println("SAVE CHART");
         } else if (e.getActionCommand().equals("LOADCHART")) {
             loadChart();
-            System.out.println("LOAD CHART");
         }
 
         revalidate();

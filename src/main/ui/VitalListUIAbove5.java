@@ -64,12 +64,13 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates new JLabels specifically for the error messages.
     private void addErrorMessages() {
         error = new JLabel("Please only enter numbers for the patient ID");
         idError = new JLabel("That patient ID does not exist. Try again.");
     }
 
-    // REQUIRES: the patient ID must be valid/present in the chart
     // MODIFIES: this, mainFrame
     // EFFECTS: once the user presses the "enter patient" button this will result in
     // a pop-up window containing a scroll pane of all the patients vitals recorded
@@ -106,12 +107,18 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a scroll pane to the center of the panel. The text area passed
+    // in are the patients vital records changed to string format.
     private void setUpScrollPane() {
         scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(300, 300));
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a text area to add to the scroll pane (patients vitals have
+    // already been converted to string format)
     private void setUpTextArea(Patient patient) {
         textArea = new JTextArea(vitalsToString(patient));
         textArea.setWrapStyleWord(true);
@@ -119,6 +126,9 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
         textArea.setEditable(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Notifies the user if the ID entered is an invalid format and
+    // directs user on how to properly enter the ID
     private void wrongValueIdEntryErrorHandling() {
         add(error);
         idError.setVisible(false);
@@ -127,6 +137,9 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
         repaint();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Notifies the user if the ID does not exist in the chart, updates
+    // valid error messages, removes any other irrelevant error messages
     private void patientDoesNotExistErrorHandling() {
         add(idError);
         error.setVisible(false);
@@ -135,7 +148,6 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
         repaint();
     }
 
-    // REQUIRES: the string must only contain digits
     // EFFECTS: converts a string of digits to a new variable of type int.
     public int returnInteger(String string) {
         int integer = Integer.parseInt(string);

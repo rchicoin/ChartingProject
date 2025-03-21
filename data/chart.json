@@ -1,51 +1,37 @@
-{"patients": [{
-    "firstName": "enter first name",
-    "lastName": "enter first name",
-    "id": 2,
-    "vitals": [
-        {
-            "systolicBp": 120,
-            "avpuScore": true,
-            "heartRate": 145,
-            "spo2": 99,
-            "supplementalOxygen": false,
-            "temperature": 36,
-            "diastolicBp": 80,
-            "respRate": 18,
-            "newsScore": 4
-        },
-        {
-            "systolicBp": 90,
-            "avpuScore": true,
-            "heartRate": 150,
-            "spo2": 85,
-            "supplementalOxygen": true,
-            "temperature": 36.5,
-            "diastolicBp": 74,
-            "respRate": 22,
-            "newsScore": 13
-        },
-        {
-            "systolicBp": 99,
-            "avpuScore": true,
-            "heartRate": 160,
-            "spo2": 79,
-            "supplementalOxygen": true,
-            "temperature": 36,
-            "diastolicBp": 79,
-            "respRate": 35,
-            "newsScore": 14
-        },
-        {
-            "systolicBp": 120,
-            "avpuScore": true,
-            "heartRate": 80,
-            "spo2": 99,
-            "supplementalOxygen": false,
-            "temperature": 36.5,
-            "diastolicBp": 80,
-            "respRate": 12,
-            "newsScore": 0
-        }
-    ]
-}]}
+{"patients": [
+    {
+        "firstName": "Reagan",
+        "lastName": "Reagan",
+        "id": 1,
+        "vitals": [
+            {
+                "systolicBp": 120,
+                "avpuScore": true,
+                "heartRate": 60,
+                "spo2": 99,
+                "supplementalOxygen": false,
+                "temperature": 36,
+                "diastolicBp": 40,
+                "respRate": 12,
+                "newsScore": 1
+            },
+            {
+                "systolicBp": 0,
+                "avpuScore": true,
+                "heartRate": 0,
+                "spo2": 0,
+                "supplementalOxygen": false,
+                "temperature": 0,
+                "diastolicBp": 0,
+                "respRate": 0,
+                "newsScore": 15
+            }
+        ]
+    },
+    {
+        "firstName": "Korthen",
+        "lastName": "Korthen",
+        "id": 2,
+        "vitals": []
+    }
+]}

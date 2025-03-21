@@ -26,7 +26,7 @@ public class AlertPanel extends JPanel implements ActionListener {
     public AlertPanel(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
         this.mainFrame = mainFrame;
         this.mainPanel = mainPanel;
-        
+
         setLayout(new BorderLayout());
 
         Border border = BorderFactory.createLineBorder(Color.RED, 10);

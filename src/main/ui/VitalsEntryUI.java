@@ -76,6 +76,8 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
         addErrorMessages();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates new JLabels specifically for the error messages.
     private void addErrorMessages() {
         error = new JLabel("Only enter whole numbers for all fields except temperature.");
         idError = new JLabel("That patient ID does not exist. Try again.");
@@ -142,11 +144,6 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
         add(next);
     }
 
-    // REQUIRES: the patient id, respRate, spo2, supplementalOxygen, systolic and
-    // diastolic bp, and heartrate must all only contain digits, the temperature
-    // must only be a double value, the supplemental oxygen must be a y if the
-    // patient is on supplemental oxygen, and the AVPU score must be "a" if the
-    // patient is alert.
     // MODIFIES: chart
     // EFFECTS: adds the values entered to the patients vital list in the chart.
     @Override
@@ -176,6 +173,10 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: reads all the information from the textfields and converts them to
+    // their respective values (int, boolean, double etc), throws an error if there
+    // are incorrect values being converted
     private void readInformationFromTextFieldsAndConvertToCorrectValuesForVitals() {
         respRate = returnInteger(respRateT.getText());
         spo2 = returnInteger(spo2T.getText());
@@ -187,6 +188,9 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
         heartRate = returnInteger(heartRateT.getText());
     }
 
+    // MODIFIES: this
+    // EFFECTS: Notifies the user if the values entered are an invalid format and
+    // directs user on how to properly enter the vital values
     private void wrongValueEntryErrorHandling() {
         add(error);
         idError.setVisible(false);
@@ -195,6 +199,9 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
         repaint();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Notifies the user if the ID does not exist in the chart, updates
+    // valid error messages, removes any other irrelevant error messages
     private void patientDoesNotExistErrorHandling() {
         add(idError);
         error.setVisible(false);
