@@ -1,12 +1,16 @@
 package ui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import model.Chart;
 
@@ -16,6 +20,7 @@ public class AlertPanel extends JPanel implements ActionListener {
     private VitalsMainMenuUI mainFrame;
     private Chart chart;
     private JPanel mainPanel;
+    private JLabel warningLabel;
 
     // EFFECTS: Creates an alert panel when patients NEWS score is above 5 and its
     // not their baseline.
@@ -23,16 +28,24 @@ public class AlertPanel extends JPanel implements ActionListener {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
+        setLayout(new BorderLayout());
+        Border border = BorderFactory.createLineBorder(Color.RED, 10);
+        setBorder(border);
+
+        warningLabel = new JLabel(
+                "<html>PLEASE ESCALATE CARE FOR THIS PATIENT, THEIR NEWS SCORE INDICATES DETERIORATION.</html>");
+        add(warningLabel, BorderLayout.NORTH);
+        warningLabel.setHorizontalTextPosition(JLabel.CENTER);
 
         JButton back = new JButton("Back to Main Menu");
 
         back.setActionCommand("BACKTOMAIN");
         back.addActionListener(this);
-        add(back);
+        add(back, BorderLayout.CENTER);
 
-        ImageIcon alert = new ImageIcon("data/alertImage.png");
+        ImageIcon alert = new ImageIcon("data/alertImageSmall.png");
         JLabel alertLabel = new JLabel(alert);
-        add(alertLabel);
+        add(alertLabel, BorderLayout.SOUTH);
     }
 
     // MODIFIES: mainFrame

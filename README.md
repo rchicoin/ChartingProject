@@ -32,3 +32,4 @@ I currently work as a nurse part-time; we chart this information in a platform c
 
 ##### Image Citation:
 - https://www.flaticon.com/free-icon/alert_10700437
+- https://www.flaticon.com/free-icons/red-cross

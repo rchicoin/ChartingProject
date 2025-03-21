@@ -215,7 +215,7 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
     // method will return false
     public boolean returnAvpu(String string) {
         string = string.toLowerCase();
-        if (string.equals("a")) {
+        if (string.equals("y")) {
             return true;
         } else {
             return false;

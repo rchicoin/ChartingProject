@@ -33,6 +33,7 @@ public class PatientEntryUI extends JPanel implements ActionListener {
     private JLabel idPrompt;
     private JLabel firstPrompt;
     private JLabel lastPrompt;
+    private JLabel error;
 
     // EFFECTS: creates a panel where a user can enter a new patient
     public PatientEntryUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
@@ -77,20 +78,27 @@ public class PatientEntryUI extends JPanel implements ActionListener {
     // the chart. Once this is done returns to the mainPanel (main menu).
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (e.getActionCommand().equals("ADDPATIENT")) {
-            first1 = first.getText();
-            last1 = first.getText();
-            String id1 = id.getText();
-            idint = Integer.parseInt(id1);
-            Patient patient = new Patient(first1, last1, idint);
-            chart.addPatient(patient);
+            try {
+                first1 = first.getText();
+                last1 = first.getText();
+                String id1 = id.getText();
+                idint = Integer.parseInt(id1);
+                Patient patient = new Patient(first1, last1, idint);
+                chart.addPatient(patient);
+
+                mainFrame.remove(this);
+                mainFrame.add(mainPanel);
+                mainFrame.revalidate();
+                mainFrame.repaint();
+            } catch (NumberFormatException e1) {
+                error = new JLabel("Please only enter numbers for the patient ID");
+                add(error);
+                revalidate();
+                repaint();
+            }
         }
 
-        mainFrame.remove(this);
-        mainFrame.add(mainPanel);
-        mainFrame.revalidate();
-        mainFrame.repaint();
     }
 
 }

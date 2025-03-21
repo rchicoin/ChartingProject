@@ -1,10 +1,15 @@
 package ui;
 
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import model.Chart;
 
@@ -14,6 +19,7 @@ public class BaseLinePanel extends JPanel implements ActionListener {
     private VitalsMainMenuUI mainFrame;
     private Chart chart;
     private JPanel mainPanel;
+    private JLabel baselinePrompt;
 
     // EFFECTS: Creates a panel asking if the vitals are within the patients
     // baseline or not, yes or no buttons included.
@@ -21,6 +27,13 @@ public class BaseLinePanel extends JPanel implements ActionListener {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
+
+        setLayout(new GridLayout(0, 1));
+
+        Border border = BorderFactory.createLineBorder(Color.BLUE, 10);
+        setBorder(border);
+        baselinePrompt = new JLabel("Are these vitals within the patients baseline?");
+        add(baselinePrompt);
 
         JButton yes = new JButton("Yes");
         JButton no = new JButton("No");
