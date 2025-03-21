@@ -12,7 +12,7 @@ import model.Patient;
 import model.Vitals;
 
 // Constructs a panel where the user can add vitals to a patients chart
-public class VitalsUI extends JPanel implements ActionListener {
+public class VitalsEntryUI extends JPanel implements ActionListener {
 
     private VitalsMainMenuUI mainFrame;
     private Chart chart;
@@ -40,7 +40,7 @@ public class VitalsUI extends JPanel implements ActionListener {
 
     // EFFECTS: creates a panel where first a patient is is verified and then vitals
     // information can be entered into a field sequentially
-    public VitalsUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
+    public VitalsEntryUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
@@ -63,6 +63,8 @@ public class VitalsUI extends JPanel implements ActionListener {
         addButtons(next);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds all buttons created in the constructor to the panel itself.
     private void addButtons(JButton next) {
         add(patientIdT);
         add(respRateT);
@@ -76,6 +78,13 @@ public class VitalsUI extends JPanel implements ActionListener {
         add(next);
     }
 
+    // REQUIRES: the patient id, respRate, spo2, supplementalOxygen, systolic and
+    // diastolic bp, and heartrate must all only contain digits, the temperature
+    // must only be a double value, the supplemental oxygen must be a y if the
+    // patient is on supplemental oxygen, and the AVPU score must be "a" if the
+    // patient is alert.
+    // MODIFIES: chart
+    // EFFECTS: adds the values entered to the patients vital list in the chart.
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ADDVITALS")) {
@@ -96,24 +105,47 @@ public class VitalsUI extends JPanel implements ActionListener {
                     avpuScore, heartRate);
             patient.addVitals(vitals);
 
-        }
+            determineNextPanel(vitals);
 
-        mainFrame.remove(this);
-        mainFrame.add(mainPanel);
-        mainFrame.revalidate();
-        mainFrame.repaint();
+        }
     }
 
+    // MODIFIES: mainFrame
+    // EFFECTS: if the recently entered vitals have a NEWS score greater than 5 it
+    // will re-direct the user to the BaseLine panel, if no they will be re-directed
+    // to the mainPanel(main menu)
+    private void determineNextPanel(Vitals vitals) {
+        if (vitals.getNewsScore() >= 5) {
+            mainFrame.remove(this);
+            mainFrame.add(new BaseLinePanel(mainFrame, chart, mainPanel));
+            mainFrame.revalidate();
+            mainFrame.repaint();
+        } else {
+            mainFrame.remove(this);
+            mainFrame.add(mainPanel);
+            mainFrame.revalidate();
+            mainFrame.repaint();
+        }
+    }
+
+    // REQUIRES: the string must only contain digits
+    // EFFECTS: converts a string of digits to a new variable of type int.
     public int returnInteger(String string) {
         int integer = Integer.parseInt(string);
         return integer;
     }
 
+    // REQUIRES: the string must only contain digits and decimals (.)
+    // EFFECTS: converts a string of digits to a new variable of type double
     public double returnDouble(String string) {
         double dbl = Double.parseDouble(string);
         return dbl;
     }
 
+    // REQUIRES: the string must be a single character y or Y, to indicate the
+    // patient is on oxygen, otherwise will read that the patient is not on oxygen
+    // EFFECTS: if the user enters y or Y the method will return true, otherwise the
+    // method will return false
     public boolean returnSupplementalOxygen(String string) {
         string = string.toLowerCase();
         if (string.equals("y")) {
@@ -123,6 +155,10 @@ public class VitalsUI extends JPanel implements ActionListener {
         }
     }
 
+    // REQUIRES: the string must be a single character a or A, to indicate the
+    // patient is alert, otherwise will read that the patient is not alert
+    // EFFECTS: if the user enters a or A the method will return true, otherwise the
+    // method will return false
     public boolean returnAvpu(String string) {
         string = string.toLowerCase();
         if (string.equals("a")) {

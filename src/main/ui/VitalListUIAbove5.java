@@ -15,7 +15,7 @@ import model.Chart;
 import model.Patient;
 import model.Vitals;
 
-// Constructs a panel where the user can view a list of the selected  patients vitals
+// Constructs a panel where the user can view a list of the selected  patients vitals with NEWS score above 5
 public class VitalListUIAbove5 extends JPanel implements ActionListener {
 
     private VitalsMainMenuUI mainFrame;
@@ -28,7 +28,7 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
     private JScrollPane scrollPane;
 
     // EFFECTS: creates a panel where first a patient is is verified and then a list
-    // of previously entered vitals is displayed
+    // of previously entered vitals is displayed with NEWS score above 5
     public VitalListUIAbove5(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
         this.mainFrame = mainFrame;
         this.chart = chart;
@@ -49,6 +49,12 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
 
     }
 
+    // REQUIRES: the patient ID must be valid/present in the chart
+    // MODIFIES: this, mainFrame
+    // EFFECTS: once the user presses the "enter patient" button this will result in
+    // a pop-up window containing a scroll pane of all the patients vitals recorded
+    // that have a NEWS score above 5, if the user clicks the "back to main menu"
+    // button they will be re-directed to the mainPanel(main menu)
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("GETPATIENT")) {
@@ -75,11 +81,15 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
 
     }
 
+    // REQUIRES: the string must only contain digits
+    // EFFECTS: converts a string of digits to a new variable of type int.
     public int returnInteger(String string) {
         int integer = Integer.parseInt(string);
         return integer;
     }
 
+    // EFFECTS: converts a patients vitals data to a string so that it can be passed
+    // into the JTextArea, which is then subsequently passed to the Jscrollpane
     public String vitalsToString(Patient patient) {
         String text = "";
         int i = 1;
@@ -90,8 +100,8 @@ public class VitalListUIAbove5 extends JPanel implements ActionListener {
                         + "Temperature:" + vital.getTemperature() + "\n" + "Systolic Blood Pressure:"
                         + vital.getSystolicBp() + "\n" + "Diastolic Blood Pressure:" + vital.getDiastolicBp() + "\n"
                         + "Was the patient alert?:" + vital.getAvpu() + "\n" + "Heart Rate:" + vital.getRespRate()
-                        + "\n" +
-                        "NEWS Score:" + vital.getNewsScore() + "\n"
+                        + "\n" 
+                        + "NEWS Score:" + vital.getNewsScore() + "\n"
                         + "======================================" + "\n");
             }
             i++;

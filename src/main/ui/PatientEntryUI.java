@@ -10,7 +10,7 @@ import model.Chart;
 import model.Patient;
 
 // Constructs a panel where the user can enter a new patient
-public class PatientUI extends JPanel implements ActionListener {
+public class PatientEntryUI extends JPanel implements ActionListener {
 
     private VitalsMainMenuUI mainFrame;
     private Chart chart;
@@ -25,7 +25,7 @@ public class PatientUI extends JPanel implements ActionListener {
     private JTextField id;
 
     // EFFECTS: creates a panel where a user can enter a new patient
-    public PatientUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
+    public PatientEntryUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
 
         this.mainFrame = mainFrame;
         this.chart = chart;
@@ -47,6 +47,10 @@ public class PatientUI extends JPanel implements ActionListener {
 
     }
 
+    // MODIFIES: chart, mainFrame
+    // EFFECTS: reads in values from the textfields to record the patients first
+    // name, last name, and ID. Creates a new patient and then adds that patient to
+    // the chart. Once this is done returns to the mainPanel (main menu).
     @Override
     public void actionPerformed(ActionEvent e) {
 

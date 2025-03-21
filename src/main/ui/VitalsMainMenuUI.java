@@ -11,8 +11,9 @@ import model.Chart;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-// Represents a main menu with choices a/b/c/d/e to either enter a new patient, 
-// add vitals to a patient, view a list of patient vitals, and either save or load a chart
+// Represents a main menu with choices to either enter a new patient, 
+// add vitals to a patient, view a list of patient vitals from newest to oldest or reversed.
+// Also has options to only view patient vitals with a NEWS score above 5, and either save or load a chart.
 public class VitalsMainMenuUI extends JFrame implements ActionListener {
 
     private static final String JSON_STORE = "./data/chart.json";
@@ -21,13 +22,14 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
     private JsonReader jsonReader;
 
     private JPanel mainPanel;
-    private PatientUI patientPanel;
+    private PatientEntryUI patientPanel;
     private VitalListUIOld vitalListPanel;
     private VitalListUINew vitalListPanelNew;
     private VitalListUIAbove5 vitalListPanelAbove5;
-    private VitalsUI vitalEntryPanel;
+    private VitalsEntryUI vitalEntryPanel;
 
-    // EFFECTS: constructs the main menu with choices a/b/c/d/e/f
+    // EFFECTS: constructs a main JFrame which starts with the main menu (mainPanel)
+    // with choices listed above.
     public VitalsMainMenuUI() {
         super("Budget Cerner App");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,6 +47,9 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
         jsonReader = new JsonReader(JSON_STORE);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates a mainPanel with the options listed above and correlating
+    // buttons to execute those options.
     public void mainPanel() {
         mainPanel = new JPanel();
 
@@ -91,11 +96,11 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("NEWPATIENT")) {
             this.remove(mainPanel);
-            patientPanel = new PatientUI(this, chart, mainPanel);
+            patientPanel = new PatientEntryUI(this, chart, mainPanel);
             this.add(patientPanel);
         } else if (e.getActionCommand().equals("ENTERVITALS")) {
             this.remove(mainPanel);
-            vitalEntryPanel = new VitalsUI(this, chart, mainPanel);
+            vitalEntryPanel = new VitalsEntryUI(this, chart, mainPanel);
             this.add(vitalEntryPanel);
         } else if (e.getActionCommand().equals("VIEWVITALSOLD")) {
             this.remove(mainPanel);

@@ -24,6 +24,28 @@
             "diastolicBp": 74,
             "respRate": 22,
             "newsScore": 13
+        },
+        {
+            "systolicBp": 99,
+            "avpuScore": true,
+            "heartRate": 160,
+            "spo2": 79,
+            "supplementalOxygen": true,
+            "temperature": 36,
+            "diastolicBp": 79,
+            "respRate": 35,
+            "newsScore": 14
+        },
+        {
+            "systolicBp": 120,
+            "avpuScore": true,
+            "heartRate": 80,
+            "spo2": 99,
+            "supplementalOxygen": false,
+            "temperature": 36.5,
+            "diastolicBp": 80,
+            "respRate": 12,
+            "newsScore": 0
         }
     ]
 }]}
