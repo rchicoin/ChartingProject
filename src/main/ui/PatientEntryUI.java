@@ -89,7 +89,7 @@ public class PatientEntryUI extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("ADDPATIENT")) {
             try {
                 first1 = first.getText();
-                last1 = first.getText();
+                last1 = last.getText();
                 String id1 = id.getText();
                 idint = Integer.parseInt(id1);
                 Patient patient = new Patient(first1, last1, idint);

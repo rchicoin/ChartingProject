@@ -57,15 +57,7 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
     public void mainPanel() {
         mainPanel = new JPanel(new GridLayout(0, 1));
 
-        JButton makePatient = new JButton("Enter a new Patient");
-        mainPanel.add(makePatient);
-        makePatient.setActionCommand("NEWPATIENT");
-        makePatient.addActionListener(this);
-
-        JButton enterVitals = new JButton("Enter Vitals");
-        mainPanel.add(enterVitals);
-        enterVitals.setActionCommand("ENTERVITALS");
-        enterVitals.addActionListener(this);
+        refactorButtonsCheckstyle();
 
         JButton viewVitalList = new JButton("View Patients Vitals List Oldest to Newest");
         mainPanel.add(viewVitalList);
@@ -94,18 +86,28 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
 
     }
 
+    // EFFECTS: creates both "enter new patient button" and "enter vitals button"
+    // and adds them to the mainFrame
+    private void refactorButtonsCheckstyle() {
+        JButton makePatient = new JButton("Enter a new Patient");
+        mainPanel.add(makePatient);
+        makePatient.setActionCommand("NEWPATIENT");
+        makePatient.addActionListener(this);
+
+        JButton enterVitals = new JButton("Enter Vitals");
+        mainPanel.add(enterVitals);
+        enterVitals.setActionCommand("ENTERVITALS");
+        enterVitals.addActionListener(this);
+    }
+
     // EFFECTS: handles the users choices based on the main menu buttons, and
     // re-directs to the relevant UI panel
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("NEWPATIENT")) {
-            this.remove(mainPanel);
-            patientPanel = new PatientEntryUI(this, chart, mainPanel);
-            this.add(patientPanel);
+            refactorNewPatientCommand();
         } else if (e.getActionCommand().equals("ENTERVITALS")) {
-            this.remove(mainPanel);
-            vitalEntryPanel = new VitalsEntryUI(this, chart, mainPanel);
-            this.add(vitalEntryPanel);
+            refactorEnterVitalsCommand();
         } else if (e.getActionCommand().equals("VIEWVITALSOLD")) {
             this.remove(mainPanel);
             vitalListPanel = new VitalListUIOld(this, chart, mainPanel);
@@ -126,6 +128,20 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
 
         revalidate();
         repaint();
+    }
+
+    // EFFECTS: creates the enter vitals panel and displays it
+    private void refactorEnterVitalsCommand() {
+        this.remove(mainPanel);
+        vitalEntryPanel = new VitalsEntryUI(this, chart, mainPanel);
+        this.add(vitalEntryPanel);
+    }
+
+    // EFFECTS: creates the enter new patient panel and displays it
+    private void refactorNewPatientCommand() {
+        this.remove(mainPanel);
+        patientPanel = new PatientEntryUI(this, chart, mainPanel);
+        this.add(patientPanel);
     }
 
     // EFFECTS: runs the relevant chart

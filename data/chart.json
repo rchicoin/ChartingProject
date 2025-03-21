@@ -33,5 +33,21 @@
         "lastName": "Korthen",
         "id": 2,
         "vitals": []
+    },
+    {
+        "firstName": "cat",
+        "lastName": "dog",
+        "id": 3,
+        "vitals": [{
+            "systolicBp": 90,
+            "avpuScore": true,
+            "heartRate": 90,
+            "spo2": 90,
+            "supplementalOxygen": true,
+            "temperature": 90,
+            "diastolicBp": 90,
+            "respRate": 90,
+            "newsScore": 13
+        }]
     }
 ]}
