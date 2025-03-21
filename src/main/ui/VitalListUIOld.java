@@ -1,15 +1,20 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import model.Chart;
 import model.Patient;
@@ -26,6 +31,7 @@ public class VitalListUIOld extends JPanel implements ActionListener {
     private JTextField patientIdT;
     private JTextArea textArea;
     private JScrollPane scrollPane;
+    private JLabel idPrompt;
 
     // EFFECTS: creates a panel where first a patient is is verified and then a list
     // of previously entered vitals is displayed from oldest to newest
@@ -33,11 +39,18 @@ public class VitalListUIOld extends JPanel implements ActionListener {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
+        setLayout(new GridLayout(0, 1));
 
-        patientIdT = new JTextField("enter id");
+        Border border = BorderFactory.createLineBorder(Color.BLUE, 10);
+        setBorder(border);
+
+        idPrompt = new JLabel("Please enter the Patients ID: ");
+        add(idPrompt);
+
+        patientIdT = new JTextField(5);
         add(patientIdT);
 
-        JButton getPatientButton = new JButton("Enter the patients ID");
+        JButton getPatientButton = new JButton("Enter");
         add(getPatientButton);
         getPatientButton.setActionCommand("GETPATIENT");
         getPatientButton.addActionListener(this);

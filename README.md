@@ -29,3 +29,6 @@ I currently work as a nurse part-time; we chart this information in a platform c
 - You can locate my visual component by entering vitals for a patient that have a NEWS score above 5, and then selecting that they are not within the patients baseline. 
 - You can save the state of my application by clicking the "Save Chart" button on the main menu
 - You can reload the state of my application by clicking the "Load Previous Chart" button on the main menu 
+
+##### Image Citation:
+- https://www.flaticon.com/free-icon/alert_10700437

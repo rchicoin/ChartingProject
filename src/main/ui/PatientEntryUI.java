@@ -1,11 +1,17 @@
 package ui;
 
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+
 import model.Chart;
 import model.Patient;
 
@@ -24,25 +30,43 @@ public class PatientEntryUI extends JPanel implements ActionListener {
     private JTextField last;
     private JTextField id;
 
+    private JLabel idPrompt;
+    private JLabel firstPrompt;
+    private JLabel lastPrompt;
+
     // EFFECTS: creates a panel where a user can enter a new patient
     public PatientEntryUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
+
+        setLayout(new GridLayout(0, 1));
 
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
 
-        first = new JTextField("enter first name");
-        last = new JTextField("enter last name");
-        id = new JTextField("enter id");
+        Border border = BorderFactory.createLineBorder(Color.BLUE, 10);
+        setBorder(border);
+
+        first = new JTextField(5);
+        last = new JTextField(5);
+        id = new JTextField(5);
+
+        idPrompt = new JLabel("Please enter the Patients ID: ");
+        add(idPrompt);
+        add(id);
+
+        firstPrompt = new JLabel("Please enter the Patients first name: ");
+        add(firstPrompt);
+        add(first);
+
+        lastPrompt = new JLabel("Please enter the Patients last name: ");
+        add(lastPrompt);
+        add(last);
 
         JButton next = new JButton("Enter/Next");
 
         next.setActionCommand("ADDPATIENT");
         next.addActionListener(this);
 
-        add(first);
-        add(last);
-        add(id);
         add(next);
 
     }

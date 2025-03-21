@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -42,6 +43,9 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
         add(mainPanel);
         mainPanel.setVisible(true);
 
+        ImageIcon alert = new ImageIcon("data/crossImage.png");
+        setIconImage(alert.getImage());
+
         chart = new Chart();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -51,7 +55,7 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
     // EFFECTS: creates a mainPanel with the options listed above and correlating
     // buttons to execute those options.
     public void mainPanel() {
-        mainPanel = new JPanel();
+        mainPanel = new JPanel(new GridLayout(0, 1));
 
         JButton makePatient = new JButton("Enter a new Patient");
         mainPanel.add(makePatient);

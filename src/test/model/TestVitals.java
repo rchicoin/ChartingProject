@@ -245,7 +245,7 @@ public class TestVitals {
     }
 
     @Test
-    void testGetNewsScore(){
+    void testGetNewsScore() {
         assertEquals(0,testVitals.calculateNewsScore(12, 99, false, 36.5, 120, 80, false, 60));
     }
 }

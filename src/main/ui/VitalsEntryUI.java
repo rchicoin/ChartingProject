@@ -1,11 +1,16 @@
 package ui;
 
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import model.Chart;
 import model.Patient;
@@ -38,43 +43,92 @@ public class VitalsEntryUI extends JPanel implements ActionListener {
     private JTextField avpuScoreT;
     private JTextField heartRateT;
 
+    private JLabel idPrompt;
+    private JLabel respPrompt;
+    private JLabel spo2Prompt;
+    private JLabel oxygenPrompt;
+    private JLabel tempPrompt;
+    private JLabel systolicPrompt;
+    private JLabel diastolicPrompt;
+    private JLabel avpuPrompt;
+    private JLabel heartRatePrompt;
+
     // EFFECTS: creates a panel where first a patient is is verified and then vitals
     // information can be entered into a field sequentially
     public VitalsEntryUI(VitalsMainMenuUI mainFrame, Chart chart, JPanel mainPanel) {
         this.mainFrame = mainFrame;
         this.chart = chart;
         this.mainPanel = mainPanel;
+        setLayout(new GridLayout(0, 1));
+        makeTextFields();
+        makeLabelsForTextFields();
 
-        patientIdT = new JTextField("enter patients id");
-        respRateT = new JTextField("enter respiratory rate");
-        spo2T = new JTextField("enter spo2");
-        supplementalOxygenT = new JTextField("enter y or n based on oxygenation status");
-        temperatureT = new JTextField("enter temperature");
-        systolicBpT = new JTextField("enter systolic blood pressure");
-        diastolicBpT = new JTextField("enter diastolic blood pressure");
-        avpuScoreT = new JTextField("enter AVPU SCORE");
-        heartRateT = new JTextField("enter heart rate");
+        Border border = BorderFactory.createLineBorder(Color.BLUE, 10);
+        setBorder(border);
 
-        JButton next = new JButton("Enter/Next");
-
+        JButton next = new JButton("Enter");
         next.setActionCommand("ADDVITALS");
         next.addActionListener(this);
-
-        addButtons(next);
+        addButtonsAndLabels(next);
     }
 
     // MODIFIES: this
-    // EFFECTS: adds all buttons created in the constructor to the panel itself.
-    private void addButtons(JButton next) {
+    // EFFECTS: makes all the labels for the text fields to prompt vital signs entry
+    private void makeLabelsForTextFields() {
+        idPrompt = new JLabel("Please enter the patients id");
+        respPrompt = new JLabel("Respiratory Rate: ");
+        spo2Prompt = new JLabel("Spo2: ");
+        oxygenPrompt = new JLabel("If the patient is on supplemental oxygen please enter y or Y, if not enter n or N");
+        tempPrompt = new JLabel("Temperature: ");
+        systolicPrompt = new JLabel("Systolic Blood Pressure: ");
+        diastolicPrompt = new JLabel("Diastolic Blood Pressure: ");
+        avpuPrompt = new JLabel("If the patient is alert and response please enter y or Y, if not enter n or N");
+        heartRatePrompt = new JLabel("Heart Rate: ");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: makes all the text fields for this panel for vitals entry
+    private void makeTextFields() {
+        patientIdT = new JTextField(5);
+        respRateT = new JTextField(5);
+        spo2T = new JTextField(5);
+        supplementalOxygenT = new JTextField(5);
+        temperatureT = new JTextField(5);
+        systolicBpT = new JTextField(5);
+        diastolicBpT = new JTextField(5);
+        avpuScoreT = new JTextField(5);
+        heartRateT = new JTextField(5);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds all textfields and labels created in the constructor to the panel itself.
+    private void addButtonsAndLabels(JButton next) {
+        add(idPrompt);
         add(patientIdT);
+
+        add(respPrompt);
         add(respRateT);
+
+        add(spo2Prompt);
         add(spo2T);
-        add(supplementalOxygenT);
+
+        add(tempPrompt);
         add(temperatureT);
+
+        add(systolicPrompt);
         add(systolicBpT);
+
+        add(diastolicPrompt);
         add(diastolicBpT);
-        add(avpuScoreT);
+
+        add(heartRatePrompt);
         add(heartRateT);
+
+        add(avpuPrompt);
+        add(avpuScoreT);
+
+        add(oxygenPrompt);
+        add(supplementalOxygenT);
         add(next);
     }
 
