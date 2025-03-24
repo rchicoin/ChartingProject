@@ -3,19 +3,23 @@ package ui;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.*;
 
 import model.Chart;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 // Represents a main menu with choices to either enter a new patient, 
 // add vitals to a patient, view a list of patient vitals from newest to oldest or reversed.
 // Also has options to only view patient vitals with a NEWS score above 5, and either save or load a chart.
-public class VitalsMainMenuUI extends JFrame implements ActionListener {
+public class VitalsMainMenuUI extends JFrame implements ActionListener, WindowListener {
 
     private static final String JSON_STORE = "./data/chart.json";
     private Chart chart;
@@ -49,6 +53,8 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
         chart = new Chart();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+
+        addWindowListener(this);
     }
 
     // MODIFIES: this
@@ -173,5 +179,42 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
 
+    }
+
+    // EFFECTS: Prints the Events in the Event log
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n\n");
+        }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        printLog(EventLog.getInstance());
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
     }
 }

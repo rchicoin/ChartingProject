@@ -13,12 +13,15 @@ public class Chart implements Writable {
     // EFFECTS: creates a chart with a list of patients
     public Chart() {
         chartList = new ArrayList<>();
+        EventLog.getInstance().logEvent(new Event("A new chart has been made."));
     }
 
     // MODIFIES: this
     // EFFECTS: adds a patient to the chart
     public void addPatient(Patient patient) {
         chartList.add(patient);
+        EventLog.getInstance().logEvent(new Event("ID: " + patient.getId() + " " + patient.getFirstName() + " "
+                + patient.getLastName() + " " + "was added to the chart."));
     }
 
     // EFFECTS: returns a patient with a id, returns null if there is not patient

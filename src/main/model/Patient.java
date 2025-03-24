@@ -28,6 +28,15 @@ public class Patient implements Writable {
     // EFFECTS: adds vital signs reading to the list of patient vitals
     public void addVitals(Vitals vital) {
         vitals.add(vital);
+        EventLog.getInstance().logEvent(new Event("The following vitals were added to patient: " + this.getId()
+                + " " + this.getFirstName() + " " + this.getLastName() + " chart." + "\n" + "Respiratory Rate:"
+                + vital.getRespRate()
+                + "\n" + "Spo2:"
+                + vital.getSpo2() + "\n" + "Supplemental O2 status:" + vital.getSupplementalOxygen() + "\n"
+                + "Temperature:" + vital.getTemperature() + "\n" + "Systolic Blood Pressure:"
+                + vital.getSystolicBp() + "\n" + "Diastolic Blood Pressure:" + vital.getDiastolicBp() + "\n"
+                + "Was the patient alert?:" + vital.getAvpu() + "\n" + "Heart Rate:" + vital.getRespRate() + "\n"
+                + "NEWS Score:" + vital.getNewsScore() + "\n"));
     }
 
     // SETTERS
