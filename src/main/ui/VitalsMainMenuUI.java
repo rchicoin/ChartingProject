@@ -47,8 +47,8 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener, WindowLi
         add(mainPanel);
         mainPanel.setVisible(true);
 
-        ImageIcon alert = new ImageIcon("data/crossImage.png");
-        setIconImage(alert.getImage());
+        ImageIcon cross = new ImageIcon("data/crossImage.png");
+        setIconImage(cross.getImage());
 
         chart = new Chart();
         jsonWriter = new JsonWriter(JSON_STORE);

@@ -33,3 +33,11 @@ I currently work as a nurse part-time; we chart this information in a platform c
 ##### Image Citation:
 - https://www.flaticon.com/free-icon/alert_10700437
 - https://www.flaticon.com/free-icons/red-cross
+
+##### Phase 4: Task 2
+
+##### Phase 4: Task 3
+Future refactoring goals:
+- I would like to make an abstract class called VitalsList that extends JPanel, I would then like to add all the methods in VitalListUIAbove5, VitalListUINew, VitalListUIOld EXCEPT for vitalsToString. I would then remove these methods from each class and just make them extend VitalsList. I would like to do this because there is a lot of repetitive code. The only change is how the vitals list is converted to a String. 
+- I wish I could change the chart to a HashMap using patient IDs as a keyvalue. I think this would be better for accomodating if there were many patients that needed to be added to the chart. (Would not have to iterate over loops to find a patient all the time). 
+- I would change VitalsMainMenuUI to instantiate the different panel objects in the constructor somehow so that each panel was only created once instead of multiple of the same panels being created each time a button is clicked. Just to prevent so many objects from being created/memory being used. I would then just change the code to change the visibility of the panels in response to buttons being clicked. 
