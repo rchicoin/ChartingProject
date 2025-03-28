@@ -35,6 +35,57 @@ I currently work as a nurse part-time; we chart this information in a platform c
 - https://www.flaticon.com/free-icons/red-cross
 
 ##### Phase 4: Task 2
+Fri Mar 28 15:29:29 PDT 2025
+A new chart has been made.
+
+
+Fri Mar 28 15:29:42 PDT 2025
+ID: 1 Reagan C was added to the chart.
+
+
+Fri Mar 28 15:30:14 PDT 2025
+ID: 2 Cat Animal was added to the chart.
+
+
+Fri Mar 28 15:30:42 PDT 2025
+The following vitals were added to patient: 1 Reagan C chart.
+Respiratory Rate:12
+Spo2:99
+Supplemental O2 status:false
+Temperature:36.5
+Systolic Blood Pressure:122
+Diastolic Blood Pressure:80
+Was the patient alert?:true
+Heart Rate:12
+NEWS Score:0
+
+
+
+Fri Mar 28 15:31:15 PDT 2025
+The following vitals were added to patient: 2 Cat Animal chart.
+Respiratory Rate:18
+Spo2:88
+Supplemental O2 status:false
+Temperature:37.0
+Systolic Blood Pressure:141
+Diastolic Blood Pressure:93
+Was the patient alert?:true
+Heart Rate:18
+NEWS Score:3
+
+
+
+Fri Mar 28 15:31:45 PDT 2025
+The following vitals were added to patient: 1 Reagan C chart.
+Respiratory Rate:12
+Spo2:92
+Supplemental O2 status:false
+Temperature:37.0
+Systolic Blood Pressure:134
+Diastolic Blood Pressure:87
+Was the patient alert?:true
+Heart Rate:12
+NEWS Score:2
 
 ##### Phase 4: Task 3
 Future refactoring goals:

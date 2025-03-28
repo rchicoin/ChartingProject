@@ -1,53 +1,29 @@
-{"patients": [
-    {
-        "firstName": "Reagan",
-        "lastName": "Reagan",
-        "id": 1,
-        "vitals": [
-            {
-                "systolicBp": 120,
-                "avpuScore": true,
-                "heartRate": 60,
-                "spo2": 99,
-                "supplementalOxygen": false,
-                "temperature": 36,
-                "diastolicBp": 40,
-                "respRate": 12,
-                "newsScore": 1
-            },
-            {
-                "systolicBp": 0,
-                "avpuScore": true,
-                "heartRate": 0,
-                "spo2": 0,
-                "supplementalOxygen": false,
-                "temperature": 0,
-                "diastolicBp": 0,
-                "respRate": 0,
-                "newsScore": 15
-            }
-        ]
-    },
-    {
-        "firstName": "Korthen",
-        "lastName": "Korthen",
-        "id": 2,
-        "vitals": []
-    },
-    {
-        "firstName": "cat",
-        "lastName": "dog",
-        "id": 3,
-        "vitals": [{
-            "systolicBp": 90,
+{"patients": [{
+    "firstName": "reagan",
+    "lastName": "chicoine",
+    "id": 1,
+    "vitals": [
+        {
+            "systolicBp": 0,
             "avpuScore": true,
-            "heartRate": 90,
-            "spo2": 90,
+            "heartRate": 0,
+            "spo2": 0,
             "supplementalOxygen": true,
-            "temperature": 90,
-            "diastolicBp": 90,
-            "respRate": 90,
-            "newsScore": 13
-        }]
-    }
-]}
+            "temperature": 0,
+            "diastolicBp": 0,
+            "respRate": 0,
+            "newsScore": 17
+        },
+        {
+            "systolicBp": 120,
+            "avpuScore": true,
+            "heartRate": 70,
+            "spo2": 99,
+            "supplementalOxygen": false,
+            "temperature": 36.5,
+            "diastolicBp": 80,
+            "respRate": 12,
+            "newsScore": 0
+        }
+    ]
+}]}

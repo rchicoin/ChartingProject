@@ -83,12 +83,12 @@ public class VitalsApp {
         }
     }
 
-    // Effects: prints the events in the event log. 
-	public void printLog(EventLog el) {
-		for (Event next : el) {
+    // Effects: prints the events in the event log.
+    public void printLog(EventLog el) {
+        for (Event next : el) {
             System.out.println(next.toString() + "\n\n");
         }
-	}
+    }
 
     // REQUIRES: The patient id must not be the same as any other patient id.
     // MODIFIES: this
