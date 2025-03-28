@@ -192,6 +192,8 @@ public class VitalsMainMenuUI extends JFrame implements ActionListener, WindowLi
     public void windowOpened(WindowEvent e) {
     }
 
+    // EFFECTS: When the window is closed the events that have been logged are
+    // printed to the console
     @Override
     public void windowClosing(WindowEvent e) {
         printLog(EventLog.getInstance());
